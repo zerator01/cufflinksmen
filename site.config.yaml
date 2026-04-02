@@ -1,147 +1,160 @@
 # ========================================
-# [YOUR_SITE_NAME] — 站点配置
+# Cufflinks Men — 站点配置
 # 数据来源：seo-plan/01_site_tone.md
 # 所有文案来自：content/final_website_copy.md
 # ========================================
 
 # A. 品牌信息
 brand:
-  name: "YOUR BRAND NAME"
+  name: "Cufflinks Men"
   gtm_id: ""
   cf_web_analytics_token: ""
-  domain: "yourdomain.com"
-  email: "info@yourdomain.com"
-  wholesale_email: "wholesale@yourdomain.com"
-  tagline: "Your brand tagline here"
-  copyright: "© 2026 Your Brand. All rights reserved."
-  shipping_banner: "Free worldwide shipping on orders over $XX"
+  domain: "cufflinksmen.com"
+  email: "hello@cufflinksmen.com"
+  wholesale_email: "wholesale@cufflinksmen.com"
+  tagline: "The Detail That Speaks First"
+  copyright: "© 2026 Cufflinks Men. All rights reserved."
+  shipping_banner: "Free worldwide shipping on orders over $35"
 
 # B. Hero 区域
 hero:
-  headline: "YOUR HERO HEADLINE"
-  subheadline: "Your hero subheadline — describe your unique value proposition here."
-  cta_text: "Shop Now"
+  headline: "The Detail That Speaks First"
+  subheadline: "Curated cufflinks for men — silver, gold, and novelty styles with mechanisms that actually hold. For weddings, work, and every formal moment in between. Starting at $8."
+  cta_text: "Explore the Collection"
   cta_link: "/products"
 
 # C. 产品分类
 categories:
-  - name: "Category One"
-    slug: "category-one"
-    image: ""
-    alt: "Category one product image description"
-    description: "Description of category one."
-  - name: "Category Two"
-    slug: "category-two"
-    image: ""
-    alt: "Category two product image description"
-    description: "Description of category two."
-  - name: "Category Three"
-    slug: "category-three"
-    image: ""
-    alt: "Category three product image description"
-    description: "Description of category three."
+  - name: "Silver Cufflinks Men"
+    slug: "silver-cufflinks-men"
+    image: "/images/category-silver.png"
+    alt: "Pair of polished silver bullet-back cufflinks resting on dark slate surface"
+    description: "The safe bet that never looks safe. Polished, brushed, or matte — silver cufflinks pair with everything from a navy interview suit to a charcoal wedding tux. Stainless steel and silver-plated finishes with bullet-back or whale-back mechanisms built to stay put all day."
+  - name: "Gold Cufflinks Men"
+    slug: "gold-cufflinks-men"
+    image: "/images/category-gold.png"
+    alt: "Gold-tone cufflink catching warm light against a white French cuff shirt"
+    description: "Warm, deliberate, unmistakable. Gold-tone cufflinks in yellow gold, rose gold, and champagne finishes for the groom who wants his details to match his band, or the professional who knows that warmth commands a room differently than silver does."
+  - name: "Novelty Cufflinks Men"
+    slug: "novelty-cufflinks-men"
+    image: "/images/category-novelty.png"
+    alt: "Collection of enamel novelty cufflinks featuring musical notes and compass designs"
+    description: "The conversation starter hiding under your cuff. Superhero shields, musical notes, sports icons, beer mugs — novelty cufflinks let you say something about yourself without saying a word. The groomsmen gift that gets worn to every wedding after yours."
 
 # D. Feature Blocks (3x PAS)
 features:
-  - subtitle: "Feature 1 Subtitle"
-    headline: "Feature 1 Headline"
-    description: "Feature 1 description — use PAS (Problem-Agitate-Solution) format."
-    image: ""
-    alt: "Feature 1 image description"
-  - subtitle: "Feature 2 Subtitle"
-    headline: "Feature 2 Headline"
-    description: "Feature 2 description."
-    image: ""
-    alt: "Feature 2 image description"
-  - subtitle: "Feature 3 Subtitle"
-    headline: "Feature 3 Headline"
-    description: "Feature 3 description."
-    image: ""
-    alt: "Feature 3 image description"
+  - subtitle: "Effortless Matching"
+    headline: "Stop Overthinking It"
+    description: "Silver or gold? Bullet-back or whale-back? Classic or quirky? You've got fifteen browser tabs open and they all look the same. We've already filtered the noise. Every cufflink here was hand-picked for one thing: does it look sharp, feel solid, and stay on all day? If the answer isn't yes to all three, it's not in our collection. Pick your metal. Pick your style. Done."
+    image: "/images/feature-matching.png"
+    alt: "Man's hand selecting a silver cufflink from a curated display of classic styles"
+  - subtitle: "Honest Materials"
+    headline: "What You See Is What You Get"
+    description: "We tell you exactly what each pair is made of — stainless steel, zinc alloy, gold-plated brass, or sterling silver. No 'premium metal blend' nonsense. The mechanism type is listed on every product page because a cufflink that pops open during a handshake defeats the entire purpose. We test the clasp before we list it."
+    image: "/images/feature-materials.png"
+    alt: "Macro close-up of a cufflink bullet-back mechanism showing the pivot action"
+  - subtitle: "Smart Spending"
+    headline: "Look Sharp Without the Markup"
+    description: "Department stores charge $40 for a pair of cufflinks made from the same materials you'll find here for $12. We cut out the retail layers. Source direct. Ship direct. Your groomsmen won't know the difference — and your wallet definitely will. Most of our collection sits under $20."
+    image: "/images/feature-value.png"
+    alt: "Five pairs of assorted cufflinks arranged in a row showing variety from classic to novelty"
 
 # E. 场景导购 (Shop by Scene/Style)
 scene_navigator:
-  title: "Find Your Perfect Match"
-  subtitle: "Not sure which style suits you? Start here."
+  title: "Find Your Pair by Occasion"
+  subtitle: "Not sure which style fits the moment? Start with the event."
   items:
-    - neckline: "Style A"
-      recommendation: "Recommendation for Style A"
+    - neckline: "Wedding Day"
+      recommendation: "Classic metals, matching sets for the groom and groomsmen"
       link: "/products"
-    - neckline: "Style B"
-      recommendation: "Recommendation for Style B"
+    - neckline: "Groomsmen Gifts"
+      recommendation: "Novelty, personalized, or matching sets — gifts they'll actually keep"
       link: "/products"
-    - neckline: "Style C"
-      recommendation: "Recommendation for Style C"
+    - neckline: "Business & Boardroom"
+      recommendation: "Understated silver and gold — the silent signal of a man who notices details"
+      link: "/products"
+    - neckline: "Black Tie & Gala"
+      recommendation: "Onyx inlays, polished silver, minimal design — formal without trying too hard"
       link: "/products"
 
 # F. About Us
 about:
   story_title: "Our Story"
-  story: "Your brand story here. Describe how you started, what you do, and why customers should trust you."
+  story: "We started with a question most men ask once and never again: where do you actually buy decent cufflinks without getting ripped off? We're a small sourcing team based in China's accessories manufacturing hub. We spend our days visiting factories, inspecting samples, and rejecting anything with a weak clasp, a cheap plating, or a price that doesn't make sense. We don't design. We don't manufacture. We select — carefully."
   difference_title: "Why Choose Us"
   difference_points:
-    - "Differentiator 1"
-    - "Differentiator 2"
-    - "Differentiator 3"
-    - "Differentiator 4"
+    - "Curated, not mass-listed: We reject most samples we receive. Only pairs with solid mechanisms and honest finishes make the cut."
+    - "Materials stated plainly: Every product page tells you exactly what the cufflink is made of — alloy, stainless steel, plated, or sterling. No mystery metals."
+    - "Mechanisms that hold: We test every clasp type — bullet-back, whale-back, and fixed — before listing. A cufflink that pops open is a cufflink we won't sell."
+    - "Free shipping over $35: We ship worldwide. Most orders arrive within 7-15 business days."
 
 # G. Testimonials (3 B2C + 3 B2B)
 testimonials:
-  - name: "Customer A"
-    role: "Role, Location"
-    avatar: ""
-    text: "Testimonial text here."
-  - name: "Customer B"
-    role: "Role, Location"
-    avatar: ""
-    text: "Testimonial text here."
-  - name: "Customer C"
-    role: "Role, Location"
-    avatar: ""
-    text: "Testimonial text here."
-  - name: "Business D"
-    role: "Business Role, Location"
-    avatar: ""
-    text: "B2B testimonial text here."
-  - name: "Business E"
-    role: "Business Role, Location"
-    avatar: ""
-    text: "B2B testimonial text here."
-  - name: "Business F"
-    role: "Business Role, Location"
-    avatar: ""
-    text: "B2B testimonial text here."
+  - name: "Marcus J."
+    role: "Groom, Atlanta"
+    avatar: "/images/avatar-marcus.png"
+    text: "I bought matching silver pairs for my five groomsmen and one for myself. Every single guy wore them — which never happens with groomsmen gifts. The bullet-back mechanism held solid through the ceremony, the reception, and the afterparty."
+  - name: "Daniel T."
+    role: "Corporate Professional, Singapore"
+    avatar: "/images/avatar-daniel.png"
+    text: "I was skeptical about ordering cufflinks online for under $15, honestly. But the weight and the finish on these are genuinely better than a pair I bought from a department store for four times the price. I've been wearing the brushed silver set to meetings for three months — still looks sharp."
+  - name: "Ryan S."
+    role: "Best Man, London"
+    avatar: "/images/avatar-ryan.png"
+    text: "Got my brother a pair of the novelty music note cufflinks for his wedding — he's a jazz guitarist. He texted me a photo from his honeymoon wearing them with a linen shirt. That's when you know you nailed the gift."
+  - name: "Priya M."
+    role: "Online Retailer, Dubai"
+    avatar: "/images/avatar-priya.png"
+    text: "I used to source cufflinks on Alibaba and it was a gamble every time — different quality in every shipment. These guys handle all of that. Three bulk orders in, and every batch has matched the samples exactly."
+  - name: "Tom K."
+    role: "Wedding Planner, Melbourne"
+    avatar: "/images/avatar-tom.png"
+    text: "I recommend them for groomsmen gift bundles. The pricing makes sense for wedding budgets, and the quality is reliable enough that I don't get complaints. Which is all I really need."
+  - name: "Sarah L."
+    role: "Gift Box Curator, Toronto"
+    avatar: "/images/avatar-sarah.png"
+    text: "What sold me was the honesty. They told me upfront which finishes were plated and which were solid steel, and gave me realistic timelines. No surprises. That kind of transparency is rare when you're sourcing from China."
 
 # H. FAQ (B2C only - B2B FAQ lives on /wholesale)
 faq_orders:
-  - q: "FAQ Question 1"
-    a: "Answer 1"
-  - q: "FAQ Question 2"
-    a: "Answer 2"
-  - q: "FAQ Question 3"
-    a: "Answer 3"
+  - q: "What materials are your cufflinks made of?"
+    a: "It depends on the pair. Our entry-level cufflinks use zinc alloy with enamel or glass detailing. Our mid-range pairs feature gold-plated or silver-plated brass. Our premium pairs use solid stainless steel or 925 sterling silver. Every product page lists the exact materials — no guesswork."
+  - q: "What mechanism types do you carry?"
+    a: "We carry three main types: bullet-back (the most common — a small cylinder that rotates to lock), whale-back (a flat toggle — sleek and modern), and fixed-back (no moving parts — the most durable). Each product page specifies the mechanism type."
+  - q: "Do you offer free shipping?"
+    a: "Yes — free worldwide shipping on all orders over $35. Orders under $35 have a flat shipping rate shown at checkout."
+  - q: "How long does delivery take?"
+    a: "Most orders ship within 1-3 business days. Standard delivery takes 7-15 business days depending on your location. Tracking is included with every order."
+  - q: "Can I track my order?"
+    a: "Absolutely. You'll receive a tracking number via email once your order ships."
+  - q: "What's your return policy?"
+    a: "We offer a 30-day return policy. If you're not satisfied, contact us within 30 days of delivery for a full refund or exchange. Items should be unworn and in original packaging."
+  - q: "Will the gold plating wear off?"
+    a: "Let's be straightforward — gold plating is not solid gold. With daily wear, it will show signs of use over time. For weddings, events, and occasional formal wear, it holds up well. Store them in the included pouch and keep them away from water and cologne."
+  - q: "Will these fit my shirts?"
+    a: "Cufflinks are designed for French cuff (double cuff) shirts — the kind with two buttonholes instead of buttons. They won't attach to standard button-cuff shirts. If you're buying for a wedding, most rental tuxedo shirts already have French cuffs."
 
 # I. Final CTA
 final_cta:
-  headline: "Your CTA headline here."
-  subtext: "Supporting text with starting price or key benefit."
-  cta_text: "Shop Now"
+  headline: "Your details say more than your words."
+  subtext: "Curated cufflinks for men — solid mechanisms, honest materials, starting at $8."
+  cta_text: "Browse Styles"
   cta_link: "/products"
   trust_signals:
-    - "Free shipping over $XX"
+    - "Free shipping over $35"
     - "30-day returns"
     - "Secure checkout"
 
 # J. 商业参数
 commerce:
-  free_shipping_threshold: 50
+  free_shipping_threshold: 35
   currency: "USD"
   return_days: 30
 
 # K. SEO
 seo:
-  title_suffix: "| Your Brand Name"
-  default_description: "Your default site meta description here."
+  title_suffix: "| Cufflinks Men"
+  default_description: "Curated cufflinks for men — silver, gold, and novelty styles with solid mechanisms. Free shipping over $35."
 
 # L. 导航
 nav:
@@ -179,6 +192,6 @@ exit_popup:
 
 # O. 联系方式 (Contact)
 contact:
-  email: "hello@yourdomain.com"
+  email: "hello@cufflinksmen.com"
   hours: "Mon-Fri, 9:00 AM - 6:00 PM (GMT+8)"
-  address: "Your City, Country"
+  address: "Guangzhou, China"
