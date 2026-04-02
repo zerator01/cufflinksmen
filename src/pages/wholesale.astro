@@ -1,0 +1,534 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TestimonialSlider from '../components/TestimonialSlider.astro';
+import config from '../lib/config';
+
+// B2B testimonials only (indices 3-5 in the array)
+const b2bTestimonials = config.testimonials.slice(3, 6);
+---
+
+<BaseLayout title="Wholesale & Bulk Orders" description="Partner with Bridal Jewellery Set for wholesale bridal jewellery. Direct sourcing from China's manufacturing heartland — MOQ from 20 sets, tiered pricing, OEM available.">
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 1. MINIMALIST EDITORIAL HERO               -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="ws-hero">
+    <div class="container ws-hero__content">
+      <p class="section__subtitle">For Boutiques, Planners & Retailers</p>
+      <h1>Wholesale & Bulk Orders</h1>
+      <p class="ws-hero__text">Your trusted sourcing partner in China's jewellery heartland. Direct manufacturer access, rigorous on-the-ground QC, and competitive tiered pricing — without the Alibaba headaches.</p>
+      <a href="#inquiry-form" class="btn btn--primary ws-hero__cta">Request a Quote</a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 2. WHY PARTNER WITH US — VALUE PROP GRID   -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__subtitle">The Advantage</p>
+        <h2 class="section__title">Why Source Through Us?</h2>
+      </div>
+      <div class="ws-value-grid">
+        <div class="ws-value-card">
+          <div class="ws-value-card__number">01.</div>
+          <h3>Direct Supply Chain</h3>
+          <p>We're not a trading company. Our team works directly with vetted manufacturers in Yiwu and Guangzhou — cutting out middlemen and their markups. You get factory-direct pricing with a professional sourcing layer on top.</p>
+        </div>
+        <div class="ws-value-card">
+          <div class="ws-value-card__number">02.</div>
+          <h3>Relentless Quality Control</h3>
+          <p>Every batch is inspected in person before shipping. We photograph samples from each production run and compare against the approved reference. If anything doesn't match, we reject and re-order. Zero surprises.</p>
+        </div>
+        <div class="ws-value-card">
+          <div class="ws-value-card__number">03.</div>
+          <h3>Predictable Logistics</h3>
+          <p>Stock items ship within 3–5 days. Custom orders take 2–4 weeks. We give you honest timelines upfront — and we hit them. No language barriers, no ghosting, no excuses.</p>
+        </div>
+        <div class="ws-value-card">
+          <div class="ws-value-card__number">04.</div>
+          <h3>OEM & Custom Orders</h3>
+          <p>Custom stone colors, metal finishes, packaging design, logo engraving — we coordinate it all with our factory partners. Your brand, our sourcing expertise.</p>
+        </div>
+        <div class="ws-value-card">
+          <div class="ws-value-card__number">05.</div>
+          <h3>Tiered Pricing</h3>
+          <p>The more you order, the better the per-unit price. We provide transparent, tiered quotes within 24 hours — no hidden fees, no haggling games.</p>
+        </div>
+        <div class="ws-value-card">
+          <div class="ws-value-card__number">06.</div>
+          <h3>Sample Before You Commit</h3>
+          <p>Order any set from our website at retail price to evaluate quality firsthand. When you place a bulk order, we credit the sample cost toward your wholesale invoice.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 3. B2B FAQ ACCORDION                        -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section section--alt" id="b2b-faq">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__subtitle">Common Questions</p>
+        <h2 class="section__title">Wholesale FAQ</h2>
+      </div>
+      <div class="ws-faq">
+        <details class="ws-faq__item">
+          <summary>Are you a factory or a trading company?</summary>
+          <p>Neither, exactly. We're a dedicated sourcing and curation team based in China's jewellery heartland — Yiwu and Guangzhou. We work directly with vetted manufacturers, handle quality control in person, and take care of international shipping logistics. Think of us as your trusted buyer on the ground in China.</p>
+        </details>
+        <details class="ws-faq__item">
+          <summary>What's the minimum order quantity (MOQ)?</summary>
+          <p>MOQs vary by manufacturer and design. For our most popular sets, we can typically accommodate orders as low as 20 sets per style. Contact us with the specific products you're interested in and we'll confirm the exact MOQ and pricing.</p>
+        </details>
+        <details class="ws-faq__item">
+          <summary>Do you offer wholesale pricing or bulk discounts?</summary>
+          <p>Yes. We offer tiered pricing based on order volume. The more you order, the better the per-unit price. Reach out with your target quantities and we'll send a custom quote within 24 hours.</p>
+        </details>
+        <details class="ws-faq__item">
+          <summary>Can you do custom designs, OEM, or private labeling?</summary>
+          <p>We can coordinate custom orders with our factory partners — including custom stone colors, metal finishes, packaging, and logo engraving. Turnaround and MOQs for custom orders are typically higher than stock items. Let us know what you need and we'll scope it with the manufacturers.</p>
+        </details>
+        <details class="ws-faq__item">
+          <summary>What's the typical lead time for bulk orders?</summary>
+          <p>Stock items ship within 3–5 business days. Custom or large-volume orders typically take 2–4 weeks depending on quantity and complexity. We'll give you an honest timeline upfront — no surprises.</p>
+        </details>
+        <details class="ws-faq__item">
+          <summary>Can I order samples before committing to bulk?</summary>
+          <p>Absolutely. The easiest way is to order the sets you're interested in directly from our website at retail price. If you proceed with a bulk order, we'll credit the sample cost toward your wholesale invoice.</p>
+        </details>
+        <details class="ws-faq__item">
+          <summary>How do you ensure quality consistency across batches?</summary>
+          <p>Our team inspects every batch in person before it ships. We photograph samples from each production run and compare against the approved reference. If anything doesn't match, we reject it and re-order. You get photos of the actual goods before they leave our warehouse.</p>
+        </details>
+        <details class="ws-faq__item">
+          <summary>How do I get in touch with your wholesale team?</summary>
+          <p>Email us at <a href={`mailto:${config.brand.wholesale_email}`}>{config.brand.wholesale_email}</a> with your business name, the products you're interested in, and your target quantities. We typically respond within 24 hours with a full quote and lead time estimate.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 4. B2B TESTIMONIALS                         -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__subtitle">Trusted Partners</p>
+        <h2 class="section__title">What Our Wholesale Clients Say</h2>
+      </div>
+      <TestimonialSlider testimonials={b2bTestimonials} />
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 5. B2B INQUIRY FORM                         -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section section--alt" id="inquiry-form">
+    <div class="container">
+      <div class="ws-inquiry-layout">
+        <div class="ws-inquiry-info">
+          <p class="section__subtitle">Ready to Start?</p>
+          <h2>Request a Wholesale Quote</h2>
+          <p class="ws-inquiry-info__text">Tell us about your business and what you're looking for. Our team will respond within 24 hours with a detailed quote, MOQ confirmation, and lead time estimate.</p>
+          <div class="ws-inquiry-info__contact">
+            <p><strong>Direct wholesale line:</strong></p>
+            <p><a href={`mailto:${config.brand.wholesale_email}`}>{config.brand.wholesale_email}</a></p>
+          </div>
+        </div>
+
+        <div class="ws-inquiry-form-wrapper">
+          <form class="ws-inquiry-form" action="#" method="POST" onsubmit="event.preventDefault(); alert('Thank you! Our wholesale team will be in touch within 24 hours.');">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="ws-name">Contact Name *</label>
+                <input type="text" id="ws-name" name="name" required placeholder="Your full name" />
+              </div>
+              <div class="form-group">
+                <label for="ws-email">Business Email *</label>
+                <input type="email" id="ws-email" name="email" required placeholder="you@company.com" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="ws-company">Business Name *</label>
+                <input type="text" id="ws-company" name="company" required placeholder="Company / Store name" />
+              </div>
+              <div class="form-group">
+                <label for="ws-website">Website (optional)</label>
+                <input type="url" id="ws-website" name="website" placeholder="https://yourstore.com" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Interested Categories</label>
+              <div class="checkbox-group">
+                <label class="checkbox-label">
+                  <input type="checkbox" name="categories" value="pearl" /> Pearl Sets
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" name="categories" value="crystal" /> Crystal Sets
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" name="categories" value="gold-plated" /> Gold-Plated Sets
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" name="categories" value="custom" /> Custom / OEM
+                </label>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="ws-quantity">Estimated Quantity (sets)</label>
+                <select id="ws-quantity" name="quantity">
+                  <option value="">Select range</option>
+                  <option value="20-50">20 – 50 sets</option>
+                  <option value="50-100">50 – 100 sets</option>
+                  <option value="100-500">100 – 500 sets</option>
+                  <option value="500+">500+ sets</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="ws-timeline">When do you need them?</label>
+                <select id="ws-timeline" name="timeline">
+                  <option value="">Select timeline</option>
+                  <option value="asap">ASAP (stock items)</option>
+                  <option value="2-4weeks">2 – 4 weeks</option>
+                  <option value="1-2months">1 – 2 months</option>
+                  <option value="exploring">Just exploring</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="ws-message">Additional Requirements</label>
+              <textarea id="ws-message" name="message" rows="4" placeholder="Tell us about custom packaging, private labeling, specific styles you're interested in, etc."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--block">Submit Wholesale Inquiry</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* ═══════════════════════════════════════════ */
+  /* HERO — Minimalist Light                     */
+  /* ═══════════════════════════════════════════ */
+  .ws-hero {
+    position: relative;
+    background: var(--color-bg); /* Switched to light */
+    color: var(--color-primary);
+    padding: var(--space-4xl) 0 var(--space-3xl);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .ws-hero__content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .ws-hero h1 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .ws-hero__text {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-lg);
+    line-height: 1.7;
+    margin: 0 auto var(--space-xl);
+    max-width: 650px;
+  }
+
+  .ws-hero__cta {
+    display: inline-block;
+  }
+
+  @media (max-width: 768px) {
+    .ws-hero {
+      padding: var(--space-3xl) 0;
+    }
+  }
+
+  /* ═══════════════════════════════════════════ */
+  /* VALUE PROP GRID                             */
+  /* ═══════════════════════════════════════════ */
+  .ws-value-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+  }
+
+  @media (max-width: 960px) {
+    .ws-value-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .ws-value-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .ws-value-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-xl);
+    transition: all var(--transition-base);
+  }
+
+  .ws-value-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+  }
+
+  .ws-value-card__number {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    color: var(--color-border);
+    line-height: 1;
+    margin-bottom: var(--space-md);
+    font-weight: 300;
+  }
+
+  .ws-value-card h3 {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+  }
+
+  .ws-value-card p {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  /* ═══════════════════════════════════════════ */
+  /* FAQ ACCORDION                               */
+  /* ═══════════════════════════════════════════ */
+  .ws-faq {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .ws-faq__item {
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-lg) 0;
+  }
+
+  .ws-faq__item:first-child {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .ws-faq__item summary {
+    font-family: var(--font-serif);
+    font-size: var(--font-size-lg);
+    font-weight: 500;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-md);
+    transition: color var(--transition-base);
+  }
+
+  .ws-faq__item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .ws-faq__item summary::after {
+    content: '+';
+    font-family: var(--font-sans);
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+  }
+
+  .ws-faq__item[open] summary::after {
+    content: '−';
+  }
+
+  .ws-faq__item summary:hover {
+    color: var(--color-primary);
+  }
+
+  .ws-faq__item p {
+    margin-top: var(--space-md);
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    font-size: var(--font-size-base);
+    padding-right: var(--space-2xl);
+  }
+
+  .ws-faq__item p a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* ═══════════════════════════════════════════ */
+  /* INQUIRY FORM                                */
+  /* ═══════════════════════════════════════════ */
+  .ws-inquiry-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: var(--space-4xl);
+    align-items: start;
+  }
+
+  @media (max-width: 768px) {
+    .ws-inquiry-layout {
+      grid-template-columns: 1fr;
+      gap: var(--space-2xl);
+    }
+  }
+
+  .ws-inquiry-info h2 {
+    margin-bottom: var(--space-md);
+  }
+
+  .ws-inquiry-info__text {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-lg);
+    line-height: 1.7;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .ws-inquiry-info__contact {
+    padding: var(--space-lg);
+    background: var(--color-white);
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--color-border);
+  }
+
+  .ws-inquiry-info__contact p {
+    margin-bottom: var(--space-xs);
+  }
+
+  .ws-inquiry-info__contact a {
+    color: var(--color-primary);
+    font-size: var(--font-size-lg);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: var(--transition-base);
+  }
+
+  .ws-inquiry-info__contact a:hover {
+    border-color: var(--color-primary);
+  }
+
+  .ws-inquiry-form-wrapper {
+    background: var(--color-white);
+    padding: var(--space-2xl);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .ws-inquiry-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  @media (max-width: 600px) {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .form-group label {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-base);
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-sm);
+    background-color: #fafaf9;
+    color: var(--color-text);
+    transition: var(--transition-base);
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: rgba(0, 0, 0, 0.2);
+    background-color: var(--color-white);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.03);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+  }
+
+  .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    padding-top: var(--space-xs);
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    cursor: pointer;
+    font-weight: 400 !important;
+  }
+
+  .checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-bg-dark);
+  }
+
+  .btn--block {
+    width: 100%;
+    margin-top: var(--space-sm);
+  }
+</style>

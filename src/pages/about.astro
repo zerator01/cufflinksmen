@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TestimonialSlider from '../components/TestimonialSlider.astro';
+import config from '../lib/config';
+---
+
+<BaseLayout title="About Us" description="We're a team of sourcing specialists curating the best bridal jewellery sets from China's manufacturing heartland.">
+  <!-- Hero Banner -->
+  <section class="page-hero-clean">
+    <div class="container page-hero-clean__content">
+      <p class="section__subtitle section__subtitle--hero">Our Story</p>
+      <h1>{config.brand.name}</h1>
+      <p class="page-hero-clean__text">Curating stunning bridal jewellery that photographs beautifully — at prices that make sense.</p>
+    </div>
+  </section>
+
+  <!-- Our Story -->
+  <section class="section">
+    <div class="container">
+      <div class="about-content">
+        <div class="about-content__text">
+          <h2>{config.about.story_title}</h2>
+          <p>{config.about.story}</p>
+        </div>
+        <div class="about-content__image">
+          <img src="https://assets.bridaljewelleryset.com/images/about-hero.png" alt="Behind the scenes at our bridal jewellery curation studio representing honest and transparent practices" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="about-content about-content--reverse">
+        <div class="about-content__text">
+          <h2>{config.about.difference_title}</h2>
+          <ul class="about-points">
+            {config.about.difference_points.map((point: string) => (
+              <li>{point}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="about-content__image">
+          <img src="https://assets.bridaljewelleryset.com/images/about-why.png" alt="Quality inspection of a sparkling bridal necklace under a magnifying loupe" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__subtitle">What They Say</p>
+        <h2 class="section__title">Trusted by Brides & Retailers</h2>
+      </div>
+      <TestimonialSlider testimonials={config.testimonials.slice(0, 3)} />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero-clean {
+    padding: var(--space-4xl) 0 var(--space-3xl);
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    text-align: center;
+  }
+  .page-hero-clean__content {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .page-hero-clean h1 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-md);
+  }
+  .page-hero-clean__text {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+    margin: 0 auto;
+  }
+
+  .about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3xl);
+    align-items: center;
+  }
+
+  .about-content--reverse .about-content__image {
+    order: -1;
+  }
+
+  .about-content__text h2 {
+    margin-bottom: var(--space-lg);
+  }
+
+  .about-content__text p {
+    color: var(--color-text-muted);
+    line-height: 1.9;
+  }
+
+  .about-content__image img {
+    width: 100%;
+    border-radius: var(--border-radius-lg);
+    aspect-ratio: 8 / 5;
+    object-fit: cover;
+  }
+
+  @media (max-width: 768px) {
+    .about-content,
+    .about-content--reverse {
+      grid-template-columns: 1fr;
+    }
+
+    .about-content--reverse .about-content__image {
+      order: 0;
+    }
+  }
+</style>

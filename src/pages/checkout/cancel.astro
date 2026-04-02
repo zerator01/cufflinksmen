@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Checkout Cancelled" description="Your checkout was cancelled.">
+  <section class="checkout-result section">
+    <div class="container" style="max-width: 600px; text-align: center; padding: 6rem 1rem;">
+      <div class="cancel-icon">←</div>
+      <h1>Checkout Cancelled</h1>
+      <p class="checkout-result__msg">
+        No worries — your cart is still saved. Return whenever you're ready.
+      </p>
+      <a href="/products" class="btn btn--primary" style="margin-top: 2rem; display: inline-block;">Back to Shop</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .cancel-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--color-bg-alt);
+    color: var(--color-text-muted);
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--space-xl);
+    border: 1px solid var(--color-border);
+  }
+
+  h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: -0.03em;
+    margin-bottom: var(--space-lg);
+  }
+
+  .checkout-result__msg {
+    font-size: 1.1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+  }
+</style>

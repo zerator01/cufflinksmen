@@ -1,0 +1,246 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import config from '../../lib/config';
+
+const allProducts = await getCollection('products');
+const categories = config.categories || [];
+
+const mappedProducts = allProducts.map(entry => ({
+  id: entry.id,
+  name: entry.data.name,
+  price: entry.data.price,
+  image: entry.data.image,
+  link: `/products/${entry.id}`,
+  category: entry.data.category,
+}));
+---
+
+<BaseLayout title="Shop All Sets" description="Browse our curated collection of bridal jewellery sets — pearl, crystal, and gold-plated styles.">
+  <section class="page-hero-clean">
+    <div class="container page-hero-clean__content">
+      <p class="section__subtitle section__subtitle--hero">Our Collection</p>
+      <h1>Shop All Sets</h1>
+      <p class="page-hero-clean__text">Curated bridal jewellery — pearl, crystal, and gold-plated styles</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="filter-bar">
+        <div class="filter-bar__tabs">
+          <button class="filter-tab active" data-cat="all">All</button>
+          {categories.map((cat: any) => (
+            <button class="filter-tab" data-cat={cat.slug}>{cat.name}</button>
+          ))}
+        </div>
+        <div class="filter-bar__controls">
+          <label for="sort-select" class="filter-bar__label">Sort by</label>
+          <select id="sort-select" class="filter-bar__select">
+            <option value="default">Featured</option>
+            <option value="price-asc">Price: Low → High</option>
+            <option value="price-desc">Price: High → Low</option>
+            <option value="name-asc">Name: A-Z</option>
+            <option value="name-desc">Name: Z-A</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="product-grid grid grid--3" id="sortable-grid">
+        {mappedProducts.map(product => (
+          <div class="product-card card" data-price={product.price} data-name={product.name} data-category={product.category}>
+            <div class="product-card__image-wrap">
+              <a href={product.link}>
+                <img src={product.image} alt={product.name} class="card__image" loading="lazy" />
+              </a>
+            </div>
+            <div class="card__body" style="text-align:center;">
+              <h3 class="card__title">{product.name}</h3>
+              <p class="product-card__price">${product.price.toFixed(2)}</p>
+              <a href={product.link} class="btn btn--primary">
+                View Set
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero-clean {
+    padding: var(--space-4xl) 0 var(--space-3xl);
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    text-align: center;
+  }
+  .page-hero-clean__content {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .page-hero-clean h1 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-md);
+  }
+  .page-hero-clean__text {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+    margin: 0 auto;
+  }
+
+  .filter-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+    flex-wrap: wrap;
+    gap: var(--space-md);
+  }
+
+  .filter-bar__tabs {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+  }
+
+  .filter-tab {
+    appearance: none;
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 6px 18px;
+    font-family: var(--font-body);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--color-text-muted);
+    transition: all var(--transition-base);
+  }
+
+  .filter-tab:hover {
+    border-color: var(--color-accent);
+    color: var(--color-primary);
+  }
+
+  .filter-tab.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  .filter-bar__controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .filter-bar__label {
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    color: var(--color-text-muted);
+  }
+
+  .filter-bar__select {
+    appearance: none;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-sm);
+    padding: 8px 32px 8px 12px;
+    font-family: var(--font-body);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%231C1917' d='M6 8.825a.5.5 0 0 1-.354-.146L2.146 5.18a.5.5 0 1 1 .708-.708L6 7.618l3.146-3.146a.5.5 0 1 1 .708.708L6.354 8.679a.5.5 0 0 1-.354.146z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    transition: border-color var(--transition-base);
+  }
+
+  .filter-bar__select:focus {
+    outline: none;
+    border-color: var(--color-accent);
+  }
+
+  .product-card__price {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: var(--space-md);
+  }
+
+  .product-card .card__image {
+    transition: transform var(--transition-slow);
+  }
+
+  .product-card:hover .card__image {
+    transform: scale(1.08);
+  }
+
+  .product-card__image-wrap {
+    overflow: hidden;
+  }
+
+  .product-card .btn {
+    width: 100%;
+  }
+</style>
+
+<script>
+  const sortSelect = document.getElementById('sort-select') as HTMLSelectElement;
+  const grid = document.getElementById('sortable-grid');
+  const filterTabs = document.querySelectorAll('.filter-tab');
+
+  function getCards() {
+    return grid ? Array.from(grid.querySelectorAll('.product-card')) as HTMLElement[] : [];
+  }
+
+  // Sort
+  if (sortSelect && grid) {
+    sortSelect.addEventListener('change', () => {
+      const cards = getCards().filter(c => c.style.display !== 'none');
+      const val = sortSelect.value;
+
+      cards.sort((a, b) => {
+        const priceA = parseFloat(a.getAttribute('data-price') || '0');
+        const priceB = parseFloat(b.getAttribute('data-price') || '0');
+        const nameA = (a.getAttribute('data-name') || '').toLowerCase();
+        const nameB = (b.getAttribute('data-name') || '').toLowerCase();
+
+        switch (val) {
+          case 'price-asc': return priceA - priceB;
+          case 'price-desc': return priceB - priceA;
+          case 'name-asc': return nameA.localeCompare(nameB);
+          case 'name-desc': return nameB.localeCompare(nameA);
+          default: return 0;
+        }
+      });
+
+      cards.forEach(card => grid.appendChild(card));
+    });
+  }
+
+  // Category Filter
+  filterTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      filterTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      const cat = tab.getAttribute('data-cat');
+      const cards = getCards();
+
+      cards.forEach(card => {
+        if (cat === 'all' || card.getAttribute('data-category') === cat) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

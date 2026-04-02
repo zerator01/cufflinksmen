@@ -1,0 +1,136 @@
+---
+import config from '../lib/config';
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <img src="/logo.svg" alt={config.brand.name} height="40" class="footer__logo-img" style="filter: invert(1) brightness(2);" />
+        <p class="footer__tagline">{config.brand.tagline}</p>
+        <p class="footer__email">
+          <a href={`mailto:${config.brand.email}`}>{config.brand.email}</a>
+        </p>
+      </div>
+
+      <div class="footer__links">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="/products">Shop</a></li>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/#faq">FAQ</a></li>
+          <li><a href="/wholesale">Wholesale Inquiries</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__links">
+        <h5>Help</h5>
+        <ul>
+          <li><a href="/help">Customer Help</a></li>
+          <li><a href="/help#shipping">Shipping Info</a></li>
+          <li><a href="/help#returns">Return Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__links">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>{config.brand.copyright}</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-on-dark);
+    padding: var(--space-4xl) 0 var(--space-xl);
+  }
+
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: var(--space-3xl);
+    margin-bottom: var(--space-3xl);
+  }
+
+  .footer__logo {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-2xl);
+    color: var(--color-white);
+    margin-bottom: var(--space-md);
+  }
+
+  .footer__tagline {
+    color: var(--color-text-light);
+    font-size: var(--font-size-sm);
+    line-height: 1.7;
+    margin-bottom: var(--space-md);
+  }
+
+  .footer__email a {
+    color: var(--color-accent);
+    font-size: var(--font-size-sm);
+    transition: color var(--transition-base);
+  }
+
+  .footer__email a:hover {
+    color: var(--color-white);
+  }
+
+  .footer__links h5 {
+    font-family: var(--font-body);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-white);
+    margin-bottom: var(--space-lg);
+  }
+
+  .footer__links ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .footer__links a {
+    color: var(--color-text-light);
+    font-size: var(--font-size-sm);
+    transition: color var(--transition-base);
+  }
+
+  .footer__links a:hover {
+    color: var(--color-accent);
+  }
+
+  .footer__bottom {
+    border-top: 1px solid var(--color-secondary);
+    padding-top: var(--space-xl);
+    text-align: center;
+  }
+
+  .footer__bottom p {
+    color: var(--color-text-light);
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 768px) {
+    .footer__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+    }
+
+    .footer__brand {
+      grid-column: span 2;
+    }
+  }
+</style>

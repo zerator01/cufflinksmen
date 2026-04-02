@@ -1,0 +1,210 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import CategoryCard from '../components/CategoryCard.astro';
+import FeatureBlock from '../components/FeatureBlock.astro';
+import SceneNavigator from '../components/SceneNavigator.astro';
+import TestimonialSlider from '../components/TestimonialSlider.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import config from '../lib/config';
+
+// Generate FAQPage + Organization JSON-LD
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": config.faq_orders.map((item: any) => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.a
+    }
+  }))
+};
+
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": config.brand.name,
+  "url": `https://${config.brand.domain}`,
+  "description": config.seo.default_description,
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": config.brand.email,
+    "contactType": "customer service"
+  }
+};
+
+const jsonLd = JSON.stringify([faqSchema, orgSchema]);
+---
+
+<BaseLayout title={config.hero.headline} description={config.seo.default_description} jsonLd={jsonLd}>
+  <!-- 板块 2: Hero -->
+  <Hero />
+
+  <!-- 板块 3: Categories -->
+  <section class="section">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__subtitle">Our Collections</p>
+        <h2 class="section__title">Shop by Category</h2>
+        <p class="section__description">Discover our carefully curated collections, each designed to complement your unique style and occasion.</p>
+      </div>
+      <div class="category-bento">
+        {config.categories.map((cat: any, i: number) => (
+          <a href={`/collections/${cat.slug}`} class={`bento-item bento-item--${i}`}>
+            <img src={cat.image} alt={cat.alt || cat.name} loading="lazy" />
+            <div class="bento-item__overlay"></div>
+            <div class="bento-item__content">
+              <h3>{cat.name}</h3>
+              <p>{cat.description}</p>
+              <span class="btn btn--white">Explore Collection</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 板块 4: Feature Blocks -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__subtitle">Why Choose Us</p>
+        <h2 class="section__title">Designed Around Your Big Day</h2>
+      </div>
+      {config.features.map((feat: any, i: number) => (
+        <FeatureBlock
+          subtitle={feat.subtitle}
+          headline={feat.headline}
+          description={feat.description}
+          image={feat.image}
+          alt={feat.alt}
+          reverse={i % 2 !== 0}
+        />
+      ))}
+    </div>
+  </section>
+
+  <!-- 板块 4b: Scene Navigator -->
+  <SceneNavigator />
+
+  <!-- 板块 7: Testimonials (B2C only on homepage) -->
+  <section class="section">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__subtitle">Real Stories</p>
+        <h2 class="section__title">What Our Customers Say</h2>
+      </div>
+      <TestimonialSlider testimonials={config.testimonials.slice(0, 3)} />
+    </div>
+  </section>
+
+  <!-- 板块 6: FAQ (B2C) -->
+  <section class="section section--alt" id="faq">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__subtitle">Common Questions</p>
+        <h2 class="section__title">Frequently Asked Questions</h2>
+      </div>
+      <FaqAccordion items={config.faq_orders} id="faq-orders" />
+    </div>
+  </section>
+
+  <!-- 板块 8: Final CTA -->
+  <FinalCTA />
+</BaseLayout>
+
+<style>
+  .category-bento {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+  }
+
+  .bento-item {
+    position: relative;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--color-white);
+    display: flex;
+    align-items: flex-end;
+    padding: var(--space-xl);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .bento-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .bento-item img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    transition: transform var(--transition-slow);
+  }
+
+  .bento-item:hover img {
+    transform: scale(1.05);
+  }
+
+  .bento-item__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10,10,10,0.8) 0%, rgba(10,10,10,0.2) 50%, transparent 100%);
+    z-index: 2;
+  }
+
+  .bento-item__content {
+    position: relative;
+    z-index: 3;
+    max-width: 600px;
+  }
+
+  .bento-item__content h3 {
+    color: var(--color-white);
+    margin-bottom: var(--space-xs);
+    font-size: var(--font-size-3xl);
+  }
+
+  .bento-item__content p {
+    color: rgba(250, 250, 249, 0.9);
+    margin-bottom: var(--space-lg);
+  }
+
+  .bento-item--0 {
+    grid-column: span 12;
+    aspect-ratio: 21 / 9;
+  }
+
+  .bento-item--0 .bento-item__content {
+    max-width: 800px;
+  }
+
+  .bento-item--1,
+  .bento-item--2 {
+    grid-column: span 6;
+    aspect-ratio: 4 / 3;
+  }
+
+  @media (max-width: 768px) {
+    .category-bento {
+      display: flex;
+      flex-direction: column;
+    }
+    .bento-item {
+      aspect-ratio: 4 / 3;
+      padding: var(--space-lg);
+    }
+    .bento-item__content h3 {
+      font-size: var(--font-size-2xl);
+    }
+  }
+</style>

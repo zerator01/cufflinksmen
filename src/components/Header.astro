@@ -1,0 +1,221 @@
+---
+import config from '../lib/config';
+
+const navItems = config.nav || [];
+---
+
+<header class="header">
+  <div class="header__banner">
+    <div class="container header__banner-inner">
+      <span class="header__shipping">{config.brand.shipping_banner}</span>
+    </div>
+  </div>
+
+  <nav class="header__nav">
+    <div class="container header__inner">
+      <a href="/" class="header__logo">
+        <img src="/logo.svg" alt={config.brand.name} height="40" class="header__logo-img" />
+      </a>
+
+      <ul class="header__menu" id="nav-menu">
+        {navItems.map((item: any) => (
+          <li><a href={item.href} class="header__link">{item.label}</a></li>
+        ))}
+      </ul>
+
+      <div class="header__actions">
+        <button id="nav-cart-btn" class="header__cart-btn" aria-label="Open cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span class="header__cart-count" id="nav-cart-count" style="display:none;">0</span>
+        </button>
+
+        <button class="header__toggle" id="nav-toggle" aria-label="Toggle navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<style>
+  .header__banner {
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-on-dark);
+    text-align: center;
+    padding: var(--space-xs) 0;
+    font-size: 0.70rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .header__banner-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-xl);
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 768px) {
+    .header__banner-inner {
+      gap: 4px;
+      flex-direction: column;
+    }
+  }
+
+  .header__nav {
+    background: var(--color-white);
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-height);
+  }
+
+  .header__logo-text {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--color-primary);
+    letter-spacing: -0.02em;
+  }
+
+  .header__menu {
+    display: flex;
+    gap: var(--space-xl);
+  }
+
+  .header__link {
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-secondary);
+    transition: color var(--transition-base);
+    position: relative;
+  }
+
+  .header__link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-accent);
+    transition: width var(--transition-base);
+  }
+
+  .header__link:hover {
+    color: var(--color-primary);
+  }
+
+  .header__link:hover::after {
+    width: 100%;
+  }
+
+  .header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .header__cart-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    padding: var(--space-xs);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+    transition: color var(--transition-base);
+  }
+
+  .header__cart-btn:hover {
+    color: var(--color-accent);
+  }
+
+  .header__cart-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .header__cart-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--color-accent);
+    color: var(--color-bg-dark);
+    font-size: 0.6rem;
+    font-weight: 700;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(25%, -25%);
+  }
+
+  .header__toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-sm);
+  }
+
+  .header__toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--color-primary);
+    transition: all var(--transition-base);
+  }
+
+  @media (max-width: 768px) {
+    .header__menu {
+      display: none;
+      position: absolute;
+      top: var(--header-height);
+      left: 0;
+      right: 0;
+      background: var(--color-white);
+      flex-direction: column;
+      padding: var(--space-xl);
+      gap: var(--space-lg);
+      border-bottom: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .header__menu.active {
+      display: flex;
+    }
+
+    .header__toggle {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const menu = document.getElementById('nav-menu');
+
+  toggle?.addEventListener('click', () => {
+    menu?.classList.toggle('active');
+  });
+</script>

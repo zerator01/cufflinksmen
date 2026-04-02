@@ -1,0 +1,47 @@
+---
+# 产品数据模板
+# 文案之神 Agent 输出的 product_copy.json 需要转换成这个格式的 .md 文件
+# 放入 src/content/products/ 目录即可自动生成产品页
+
+name: "Crystal V-Neck Bridal Necklace & Earring Set"
+price: 28.00
+description: "A coordinated crystal necklace and drop earring set designed to follow the V-line of your neckline. Brilliant-cut zircon stones catch every flash of the camera — your photographer will notice."
+image: "https://assets.bridaljewelleryset.com/products/crystal-vneck-set-01.webp"
+gallery:
+  - "https://assets.bridaljewelleryset.com/products/crystal-vneck-set-02.webp"
+  - "https://assets.bridaljewelleryset.com/products/crystal-vneck-set-03.webp"
+category: "Crystal Bridal Jewellery Sets"
+features:
+  - "Coordinated necklace + matching drop earrings"
+  - "Brilliant-cut zircon stones with silver-plated alloy setting"
+  - "Hypoallergenic — tested for all-day wear"
+  - "Y-chain pendant follows V-neckline perfectly"
+stripe_link: ""
+variants:
+  - label: "Silver Tone"
+    value: "silver"
+    price: 28.00
+    image: "https://assets.bridaljewelleryset.com/products/crystal-vneck-set-silver.webp"
+  - label: "Rose Gold"
+    value: "rose-gold"
+    price: 32.00
+    image: "https://assets.bridaljewelleryset.com/products/crystal-vneck-set-rosegold.webp"
+---
+
+## Every Photo Catches the Light
+
+There's something about the way zircon catches a camera flash — it doesn't just reflect, it scatters. This set was designed for exactly that moment: the photographer leans in, the flash fires, and your collarbone is framed in scattered light.
+
+The Y-chain pendant follows the V-line of your neckline naturally, drawing the eye downward without competing with your dress. The matching drop earrings create the same scattered-light effect along your jawline.
+
+## What's in the Box
+
+- 1× Y-chain pendant necklace (adjustable 16-18 inch chain)
+- 1× Pair of matching drop earrings
+- Soft-lined presentation box
+
+## Materials — Let's Be Honest
+
+This is a **silver-plated alloy** set with **brilliant-cut zircon** stones. It is not sterling silver, and the plating will show wear with daily use over months. But for your wedding day, this set photographs identically to pieces ten times the price.
+
+**Care tip**: Store in the included box. Avoid perfume, water, and lotions. Put it on last, take it off first.

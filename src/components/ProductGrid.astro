@@ -1,0 +1,62 @@
+---
+interface Product {
+  name: string;
+  price: number;
+  image: string;
+  link: string;
+  category?: string;
+}
+
+interface Props {
+  products: Product[];
+}
+
+const { products } = Astro.props;
+---
+
+<div class="product-grid grid grid--3">
+  {products.map((product) => (
+    <div class="product-card card">
+      <div class="product-card__image-wrap">
+        <img src={product.image} alt={product.name} class="card__image" loading="lazy" />
+      </div>
+      <div class="card__body">
+        <h3 class="card__title">{product.name}</h3>
+        <p class="product-card__price">${product.price.toFixed(2)}</p>
+        <a href={product.link} class="btn btn--primary">
+          View Set
+        </a>
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .product-card .card__body {
+    text-align: center;
+  }
+
+  .product-card__image-wrap {
+    overflow: hidden;
+  }
+
+  .product-card .card__image {
+    transition: transform var(--transition-slow);
+  }
+
+  .product-card:hover .card__image {
+    transform: scale(1.08);
+  }
+
+  .product-card__price {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: var(--space-md);
+  }
+
+  .product-card .btn {
+    width: 100%;
+  }
+</style>

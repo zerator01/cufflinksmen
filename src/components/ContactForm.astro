@@ -1,0 +1,153 @@
+---
+import config from '../lib/config';
+---
+
+<section class="contact-form section" id="contact-form">
+  <div class="container">
+    <div class="contact-form__grid">
+      <div class="contact-form__info">
+        <p class="section__subtitle">Get in Touch</p>
+        <h2 class="section__title">We'd Love to Hear from You</h2>
+        <p class="contact-form__desc">
+          Whether you're a bride with a question or a retailer looking for a partner, we're here to help. Reach out and we'll respond within 24 hours.
+        </p>
+        <div class="contact-form__details">
+          <div class="contact-form__detail">
+            <span class="contact-form__icon">✉️</span>
+            <div>
+              <p class="contact-form__label">Email</p>
+              <a href={`mailto:${config.brand.email}`}>{config.brand.email}</a>
+            </div>
+          </div>
+          <div class="contact-form__detail">
+            <span class="contact-form__icon">🌍</span>
+            <div>
+              <p class="contact-form__label">Shipping</p>
+              <p>Worldwide delivery to 50+ countries</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form__form" action="https://formsubmit.co/{config.brand.email}" method="POST">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" required placeholder="Your name" />
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required placeholder="you@example.com" />
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <select id="subject" name="subject">
+            <option value="retail">Retail Inquiry</option>
+            <option value="wholesale">Wholesale / B2B</option>
+            <option value="order">Order Support</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required placeholder="Tell us how we can help..."></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary btn--large" style="width: 100%;">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-form__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4xl);
+    align-items: start;
+  }
+
+  .contact-form__desc {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .contact-form__details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .contact-form__detail {
+    display: flex;
+    gap: var(--space-md);
+    align-items: flex-start;
+  }
+
+  .contact-form__icon {
+    font-size: var(--font-size-xl);
+    flex-shrink: 0;
+  }
+
+  .contact-form__label {
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-xs);
+  }
+
+  .contact-form__detail a,
+  .contact-form__detail p:last-child {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+  }
+
+  .contact-form__form {
+    background: var(--color-white);
+    padding: var(--space-2xl);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--color-border);
+  }
+
+  .form-group {
+    margin-bottom: var(--space-lg);
+  }
+
+  .form-group label {
+    display: block;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+    color: var(--color-primary);
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-family: var(--font-body);
+    font-size: var(--font-size-sm);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    background: var(--color-bg);
+    color: var(--color-text);
+    transition: border-color var(--transition-base);
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+  }
+
+  @media (max-width: 768px) {
+    .contact-form__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-2xl);
+    }
+  }
+</style>

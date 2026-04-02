@@ -1,0 +1,107 @@
+---
+interface Testimonial {
+  name: string;
+  role: string;
+  text: string;
+  avatar: string;
+}
+
+interface Props {
+  testimonials: Testimonial[];
+}
+
+const { testimonials } = Astro.props;
+---
+
+<div class="testimonials">
+  <div class="testimonials__track">
+    {testimonials.map((t) => (
+      <div class="testimonial">
+        <div class="testimonial__stars">★★★★★</div>
+        <blockquote class="testimonial__text">"{t.text}"</blockquote>
+        <div class="testimonial__author">
+          <img src={t.avatar} alt={t.name} class="testimonial__avatar" loading="lazy" />
+          <div>
+            <p class="testimonial__name">{t.name}</p>
+            <p class="testimonial__role">{t.role}</p>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .testimonials {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: var(--space-md) 0;
+  }
+
+  .testimonials::-webkit-scrollbar {
+    display: none;
+  }
+
+  .testimonials__track {
+    display: flex;
+    gap: var(--space-xl);
+    min-width: max-content;
+    padding: 0 var(--space-md);
+  }
+
+  .testimonial {
+    flex: 0 0 360px;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-xl);
+    transition: all var(--transition-base);
+  }
+
+  .testimonial:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  .testimonial__stars {
+    color: var(--color-accent);
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-md);
+    letter-spacing: 0.1em;
+  }
+
+  .testimonial__text {
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    line-height: 1.8;
+    margin-bottom: var(--space-lg);
+    font-style: italic;
+  }
+
+  .testimonial__author {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .testimonial__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--color-border);
+  }
+
+  .testimonial__name {
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    margin-bottom: 0;
+  }
+
+  .testimonial__role {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    margin-bottom: 0;
+  }
+</style>

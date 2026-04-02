@@ -1,0 +1,79 @@
+---
+interface Props {
+  subtitle: string;
+  headline: string;
+  description: string;
+  image: string;
+  alt?: string;
+  reverse?: boolean;
+}
+
+const { subtitle, headline, description, image, alt, reverse = false } = Astro.props;
+---
+
+<div class={`feature ${reverse ? 'feature--reverse' : ''}`}>
+  <div class="feature__image-wrap">
+    <img src={image} alt={alt || headline} class="feature__image" loading="lazy" />
+  </div>
+  <div class="feature__content">
+    <p class="section__subtitle">{subtitle}</p>
+    <h3 class="feature__title">{headline}</h3>
+    <p class="feature__text">{description}</p>
+    <a href="/products" class="btn btn--outline">Learn More</a>
+  </div>
+</div>
+
+<style>
+  .feature {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3xl);
+    align-items: center;
+    padding: var(--space-3xl) 0;
+  }
+
+  .feature--reverse {
+    direction: rtl;
+  }
+
+  .feature--reverse > * {
+    direction: ltr;
+  }
+
+  .feature__image-wrap {
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+  }
+
+  .feature__image {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+  }
+
+  .feature__image-wrap:hover .feature__image {
+    transform: scale(1.05);
+  }
+
+  .feature__title {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--space-lg);
+  }
+
+  .feature__text {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--space-xl);
+  }
+
+  @media (max-width: 768px) {
+    .feature,
+    .feature--reverse {
+      grid-template-columns: 1fr;
+      direction: ltr;
+      gap: var(--space-xl);
+      padding: var(--space-xl) 0;
+    }
+  }
+</style>

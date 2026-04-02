@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import config from '../lib/config';
+---
+
+<BaseLayout title="Terms of Service" description="Terms and conditions for purchasing from [Brand Name].">
+  <section class="legal section">
+    <div class="container legal__content">
+      <h1>Terms of Service</h1>
+      <p class="legal__updated">Last updated: April 2026</p>
+
+      <p>By accessing or placing an order on <strong>{config.brand.domain}</strong> (the "Site"), you agree to be bound by these Terms of Service. Please read them carefully before making a purchase.</p>
+
+      <h2>1. Products &amp; Descriptions</h2>
+      <p>We make every effort to display product colors, materials, and dimensions as accurately as possible. However, actual products may vary slightly from images due to photography, screen settings, and manufacturing tolerances. All product descriptions, including material composition, are stated honestly on each product page.</p>
+
+      <h2>2. Pricing &amp; Payment</h2>
+      <ul>
+        <li>All prices are listed in US Dollars (USD) and include applicable taxes unless otherwise stated.</li>
+        <li>Payments are processed securely via Stripe. We accept major credit and debit cards.</li>
+        <li>We reserve the right to change prices at any time without prior notice. Price changes do not affect orders already placed.</li>
+      </ul>
+
+      <h2>3. Orders &amp; Fulfillment</h2>
+      <ul>
+        <li>Placing an order constitutes an offer to purchase. We reserve the right to decline any order.</li>
+        <li>You will receive an email confirmation once your order is placed and a second notification with tracking information once it ships.</li>
+        <li>Most orders ship within 1–3 business days.</li>
+      </ul>
+
+      <h2>4. Shipping</h2>
+      <ul>
+        <li>We offer free worldwide shipping on orders over ${config.commerce.free_shipping_threshold}.</li>
+        <li>Standard delivery takes 7–15 business days depending on destination.</li>
+        <li>Delivery times are estimates and not guaranteed. We are not responsible for delays caused by customs, weather, or carrier issues.</li>
+        <li>Import duties, taxes, or customs fees imposed by your country are the buyer's responsibility.</li>
+      </ul>
+
+      <h2>5. Returns &amp; Refunds</h2>
+      <ul>
+        <li>We offer a {config.commerce.return_days}-day return policy from the date of delivery.</li>
+        <li>Items must be unworn, undamaged, and in their original packaging.</li>
+        <li>To initiate a return, contact us at <a href={`mailto:${config.brand.email}`}>{config.brand.email}</a> with your order number.</li>
+        <li>Refunds are issued to the original payment method within 5–10 business days of receiving the returned item.</li>
+        <li>Return shipping costs are the buyer's responsibility unless the item is defective or incorrect.</li>
+      </ul>
+
+      <h2>6. Product Warranty &amp; Durability</h2>
+      <p>Our products are fashion jewellery designed for special occasions. Gold-plated and alloy items may show wear over time with regular use — this is normal and not a defect. We recommend storing items in their box and avoiding contact with water, perfume, and lotions to extend their lifespan.</p>
+
+      <h2>7. Intellectual Property</h2>
+      <p>All content on this Site — including text, images, logos, and design — is the property of [Brand Name] and is protected by applicable copyright and trademark laws. You may not reproduce, distribute, or use any content without our written permission.</p>
+
+      <h2>8. Limitation of Liability</h2>
+      <p>To the fullest extent permitted by law, [Brand Name] shall not be liable for any indirect, incidental, or consequential damages arising from your use of the Site or purchase of products. Our total liability for any claim shall not exceed the amount you paid for the product in question.</p>
+
+      <h2>9. Governing Law</h2>
+      <p>These Terms are governed by and construed in accordance with the laws of the jurisdiction in which the business operates. Any disputes shall be resolved through good-faith negotiation before pursuing legal action.</p>
+
+      <h2>10. Changes to These Terms</h2>
+      <p>We may update these Terms from time to time. Continued use of the Site after changes are posted constitutes your acceptance of the revised Terms.</p>
+
+      <h2>11. Contact Us</h2>
+      <p>If you have questions about these Terms, contact us at:</p>
+      <p><a href={`mailto:${config.brand.email}`}>{config.brand.email}</a></p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal {
+    padding-top: var(--space-4xl);
+    padding-bottom: var(--space-4xl);
+  }
+
+  .legal__content {
+    max-width: 720px;
+  }
+
+  .legal__content h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    letter-spacing: -0.03em;
+    margin-bottom: var(--space-sm);
+  }
+
+  .legal__updated {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-3xl);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .legal__content h2 {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-top: var(--space-3xl);
+    margin-bottom: var(--space-md);
+    color: var(--color-primary);
+  }
+
+  .legal__content p {
+    line-height: 1.75;
+    color: var(--color-text);
+    margin-bottom: var(--space-md);
+  }
+
+  .legal__content ul {
+    padding-left: 1.5rem;
+    margin-bottom: var(--space-lg);
+  }
+
+  .legal__content li {
+    line-height: 1.75;
+    color: var(--color-text);
+    margin-bottom: var(--space-xs);
+  }
+
+  .legal__content a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .legal__content a:hover {
+    color: var(--color-text-muted);
+  }
+</style>

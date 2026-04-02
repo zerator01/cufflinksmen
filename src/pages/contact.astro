@@ -1,0 +1,281 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import config from '../lib/config';
+---
+
+<BaseLayout title="Contact Us" description="Get in touch with the Bridal Jewellery Set team. We're here to help with orders, shipping, and product inquiries.">
+  
+  <section class="page-hero-split">
+    <div class="page-hero-split__image">
+      <img src="/images/contact-hero.png" alt="Bridal Jewellery and Envelopes" />
+    </div>
+    <div class="page-hero-split__content">
+      <div class="page-hero-split__text-lockup">
+        <p class="section__subtitle section__subtitle--hero">We're Here for You</p>
+        <h1>Get in Touch</h1>
+        <p class="page-hero-split__text">Whether you have a question about an existing order, need styling advice, or want to discuss a custom piece, our dedicated team is ready to assist.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="contact-layout">
+        
+        <!-- Contact Information Side -->
+        <div class="contact-info">
+          <h2>How can we help?</h2>
+          <p class="contact-info__desc">We aim to respond to all inquiries within 24 hours during business days.</p>
+          
+          <div class="contact-card">
+            <h3>Customer Support</h3>
+            <p>For questions about orders, returns, and shipping.</p>
+            <a href={`mailto:${config.brand.support_email}`} class="contact-link">{config.brand.support_email}</a>
+          </div>
+
+          <div class="contact-card">
+            <h3>Wholesale & Partnerships</h3>
+            <p>Interested in buying in bulk or becoming a retail partner?</p>
+            <a href="/wholesale" class="contact-link contact-link--arrow">Visit Wholesale Portal &rarr;</a>
+          </div>
+
+          <div class="contact-card">
+            <h3>Headquarters</h3>
+            <p>Our operations and curation team are based in China's jewellery hub.</p>
+            <p class="contact-address">{config.brand.company_address}</p>
+          </div>
+        </div>
+
+        <!-- Contact Form Side -->
+        <div class="contact-form-wrapper">
+          <form class="contact-form" action="#" method="POST" onsubmit="event.preventDefault(); alert('Message sent successfully! We will get back to you soon.');">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="c-name">Name *</label>
+                <input type="text" id="c-name" name="name" required placeholder="Jane Doe" />
+              </div>
+              <div class="form-group">
+                <label for="c-email">Email *</label>
+                <input type="email" id="c-email" name="email" required placeholder="jane@example.com" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="c-subject">Subject</label>
+              <select id="c-subject" name="subject">
+                <option value="order">Order Inquiry</option>
+                <option value="product">Product Question</option>
+                <option value="shipping">Shipping & Delivery</option>
+                <option value="return">Returns & Exchanges</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="c-message">Message *</label>
+              <textarea id="c-message" name="message" rows="5" required placeholder="How can we assist you today?"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--block">Send Message</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* Split Layout Hero (Swiss Minimalist) */
+  .page-hero-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 55vh;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .page-hero-split__image {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+    background: var(--color-bg-alt); /* Placeholder while loading */
+  }
+
+  .page-hero-split__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .page-hero-split__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4xl);
+  }
+
+  .page-hero-split__text-lockup {
+    max-width: 500px;
+  }
+
+  .page-hero-split h1 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .page-hero-split__text {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 900px) {
+    .page-hero-split {
+      grid-template-columns: 1fr;
+    }
+    .page-hero-split__image {
+      height: 45vh;
+      min-height: 350px;
+    }
+  }
+
+  /* Layout */
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: var(--space-4xl);
+    align-items: start;
+  }
+
+  @media (max-width: 768px) {
+    .contact-layout {
+      grid-template-columns: 1fr;
+      gap: var(--space-2xl);
+    }
+  }
+
+  /* Info Side */
+  .contact-info h2 {
+    margin-bottom: var(--space-sm);
+    font-family: var(--font-heading);
+    font-weight: 500;
+  }
+  .contact-info__desc {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .contact-card {
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .contact-card:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+  .contact-card h3 {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-md);
+    font-weight: 600;
+    margin-bottom: var(--space-xs);
+  }
+  .contact-card p {
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-sm);
+    line-height: 1.6;
+  }
+  .contact-link {
+    color: var(--color-primary);
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: color 0.2s ease;
+  }
+  .contact-link:hover {
+    color: var(--color-accent);
+  }
+  .contact-link--arrow {
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .contact-address {
+    font-style: italic;
+  }
+
+  /* Form Side */
+  .contact-form-wrapper {
+    background: var(--color-white);
+    padding: var(--space-2xl);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  @media (max-width: 600px) {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .form-group label {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-base);
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-sm);
+    background-color: #fafaf9;
+    color: var(--color-text);
+    transition: all 0.2s ease;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: rgba(0, 0, 0, 0.2);
+    background-color: var(--color-white);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.03);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+  }
+
+  .btn--block {
+    width: 100%;
+    margin-top: var(--space-sm);
+  }
+</style>

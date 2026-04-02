@@ -1,0 +1,71 @@
+---
+import config from '../lib/config';
+
+const cta = config.final_cta;
+---
+
+<section class="final-cta">
+  <div class="container final-cta__content">
+    <h2 class="final-cta__headline">{cta.headline}</h2>
+    <p class="final-cta__subtext">{cta.subtext}</p>
+    <a href={cta.cta_link} class="btn btn--primary btn--large">{cta.cta_text}</a>
+    <div class="final-cta__trust">
+      {cta.trust_signals.map((signal: string) => (
+        <span class="final-cta__signal">✓ {signal}</span>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .final-cta {
+    padding: var(--space-4xl) 0;
+    background: linear-gradient(135deg, #1c1917 0%, #292524 100%);
+    text-align: center;
+  }
+
+  .final-cta__content {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .final-cta__headline {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-4xl);
+    color: #fafaf9;
+    margin-bottom: var(--space-md);
+    line-height: 1.2;
+  }
+
+  .final-cta__subtext {
+    font-size: var(--font-size-lg);
+    color: rgba(250, 250, 249, 0.7);
+    margin-bottom: var(--space-2xl);
+    line-height: 1.6;
+  }
+
+  .final-cta__trust {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-xl);
+    margin-top: var(--space-xl);
+    flex-wrap: wrap;
+  }
+
+  .final-cta__signal {
+    font-size: var(--font-size-sm);
+    color: rgba(250, 250, 249, 0.6);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 768px) {
+    .final-cta__headline {
+      font-size: var(--font-size-2xl);
+    }
+
+    .final-cta__trust {
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+  }
+</style>

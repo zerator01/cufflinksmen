@@ -1,0 +1,264 @@
+---
+---
+<!-- Cart Overlay & Drawer UI -->
+<div class="cart-overlay" id="cart-overlay"></div>
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cart-drawer__header">
+    <h3>Your Cart</h3>
+    <button class="cart-drawer__close" id="cart-close" aria-label="Close cart">&times;</button>
+  </div>
+  
+  <div class="cart-drawer__items" id="cart-items">
+    <!-- Populated by JS -->
+  </div>
+  
+  <div class="cart-drawer__footer">
+    <div class="cart-drawer__subtotal">
+      <span>Subtotal</span>
+      <span id="cart-subtotal">$0.00</span>
+    </div>
+    <button class="btn btn--primary cart-drawer__checkout" id="cart-checkout" disabled>Proceed to Checkout</button>
+  </div>
+</div>
+
+<style>
+  .cart-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .cart-overlay.show { opacity: 1; pointer-events: auto; }
+
+  .cart-drawer {
+    position: fixed;
+    top: 0; right: 0; bottom: 0;
+    width: 400px;
+    max-width: 100%;
+    background: var(--color-bg-light);
+    z-index: 2001;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+  }
+  .cart-drawer.show { transform: translateX(0); }
+
+  .cart-drawer__header {
+    padding: var(--space-lg);
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cart-drawer__header h3 { font-family: var(--font-heading); font-size: var(--font-size-2xl); margin: 0; }
+  .cart-drawer__close { background: transparent; border: none; font-size: 2rem; cursor: pointer; color: var(--color-text); padding: 0; line-height: 1; }
+
+  .cart-drawer__items {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  /* Global styles for dynamically injected cart items */
+  :global(.cart-item) { display: flex; gap: var(--space-md); padding-bottom: var(--space-md); border-bottom: 1px solid var(--color-border); }
+  :global(.cart-item__img) { width: 80px; height: 80px; border-radius: var(--border-radius-sm); object-fit: cover; }
+  :global(.cart-item__details) { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+  :global(.cart-item__title) { font-size: var(--font-size-sm); font-weight: 600; line-height: 1.2; margin-bottom: 4px; }
+  :global(.cart-item__price) { font-family: var(--font-heading); color: var(--color-accent); font-weight: 700; }
+  :global(.cart-item__controls) { display: flex; align-items: center; gap: var(--space-sm); margin-top: 8px; }
+  :global(.cart-item__qty-btn) { background: var(--color-bg-alt); border: 1px solid var(--color-border); width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 4px; font-weight: bold; }
+  :global(.cart-item__remove) { font-size: 0.75rem; color: var(--color-text-light); text-decoration: underline; background: none; border: none; cursor: pointer; padding: 0; margin-top: auto; text-align: left; }
+
+  .cart-drawer__footer {
+    padding: var(--space-xl);
+    border-top: 1px solid var(--color-border);
+    background: var(--color-white);
+  }
+  .cart-drawer__subtotal {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin-bottom: var(--space-lg);
+  }
+  .cart-drawer__checkout {
+    width: 100%;
+    font-size: var(--font-size-md);
+  }
+</style>
+
+<script>
+  let cart = JSON.parse(localStorage.getItem('2cjiaoshoujia_cart') || '[]');
+
+  const overlay = document.getElementById('cart-overlay');
+  const drawer = document.getElementById('cart-drawer');
+  const closeBtn = document.getElementById('cart-close');
+  const itemsContainer = document.getElementById('cart-items');
+  const subtotalEl = document.getElementById('cart-subtotal');
+  const checkoutBtn = document.getElementById('cart-checkout') as HTMLButtonElement;
+
+  function saveCart() {
+    localStorage.setItem('2cjiaoshoujia_cart', JSON.stringify(cart));
+    renderCart();
+  }
+
+  function openCart() {
+    overlay?.classList.add('show');
+    drawer?.classList.add('show');
+    renderCart();
+  }
+
+  function closeCart() {
+    overlay?.classList.remove('show');
+    drawer?.classList.remove('show');
+  }
+
+  function renderCart() {
+    if (!itemsContainer || !subtotalEl || !checkoutBtn) return;
+    
+    itemsContainer.innerHTML = '';
+    let subtotal = 0;
+
+    if (cart.length === 0) {
+      itemsContainer.innerHTML = '<p style="text-align:center; color: var(--color-text-light); padding: 3rem 0;">Your cart is empty.</p>';
+      checkoutBtn.disabled = true;
+    } else {
+      checkoutBtn.disabled = false;
+      cart.forEach((item, index) => {
+        subtotal += item.price * item.qty;
+        
+        const itemEl = document.createElement('div');
+        itemEl.className = 'cart-item';
+        itemEl.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" class="cart-item__img" />
+          <div class="cart-item__details">
+            <div>
+              <div class="cart-item__title">${item.name}</div>
+              <div class="cart-item__price">$${item.price.toFixed(2)}</div>
+            </div>
+            <div class="cart-item__controls">
+              <button class="cart-item__qty-btn" data-action="minus" data-idx="${index}">-</button>
+              <span>${item.qty}</span>
+              <button class="cart-item__qty-btn" data-action="plus" data-idx="${index}">+</button>
+            </div>
+          </div>
+          <button class="cart-item__remove" data-action="remove" data-idx="${index}">Remove</button>
+        `;
+        itemsContainer.appendChild(itemEl);
+      });
+    }
+
+    subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+    
+    // Update global cart counter if it exists
+    const counter = document.getElementById('nav-cart-count');
+    if (counter) {
+      const totalItems = cart.reduce((acc, item) => acc + item.qty, 0);
+      counter.textContent = totalItems.toString();
+      counter.style.display = totalItems > 0 ? 'inline-flex' : 'none';
+    }
+  }
+
+  // Delegated Event Listeners
+  itemsContainer?.addEventListener('click', (e) => {
+    const target = (e.target as HTMLElement).closest('button');
+    if (!target) return;
+    
+    const action = target.getAttribute('data-action');
+    const idx = parseInt(target.getAttribute('data-idx') || '0', 10);
+
+    if (action === 'plus') {
+      cart[idx].qty += 1;
+      saveCart();
+    } else if (action === 'minus') {
+      if (cart[idx].qty > 1) {
+        cart[idx].qty -= 1;
+      } else {
+        cart.splice(idx, 1);
+      }
+      saveCart();
+    } else if (action === 'remove') {
+      cart.splice(idx, 1);
+      saveCart();
+    }
+  });
+
+  closeBtn?.addEventListener('click', closeCart);
+  overlay?.addEventListener('click', closeCart);
+
+  // Expose global method for PDP and nav
+  (window as any).addToCart = (product) => {
+    const existing = cart.find(i => i.id === product.id);
+    if (existing) {
+      existing.qty += 1;
+    } else {
+      cart.push({ ...product, qty: 1 });
+    }
+    saveCart();
+    openCart();
+  };
+  
+  (window as any).openCart = openCart;
+
+  // Checkout submission
+  checkoutBtn?.addEventListener('click', async () => {
+    if (cart.length === 0) return;
+    
+    checkoutBtn.textContent = 'Contacting Payment Gateway...';
+    checkoutBtn.disabled = true;
+
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: cart })
+      });
+      const data = await res.json();
+      if (data.url) {
+        // Clear cart immediately upon redirect (optional, protects against back button)
+        // localStorage.removeItem('2cjiaoshoujia_cart');
+        window.location.href = data.url;
+      } else {
+        alert(data.error || 'Checkout session failed to create.');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('An error occurred. Please ensure your internet connection is stable.');
+    } finally {
+      checkoutBtn.textContent = 'Proceed to Checkout';
+      checkoutBtn.disabled = false;
+    }
+  });
+
+  // Initial render on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    renderCart();
+
+    // Attach to product add buttons
+    document.querySelectorAll('.js-add-to-cart').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const t = e.currentTarget as HTMLElement;
+        const id = t.getAttribute('data-id');
+        const name = t.getAttribute('data-name');
+        const price = parseFloat(t.getAttribute('data-price') || '0');
+        const image = t.getAttribute('data-image');
+        
+        (window as any).addToCart({ id, name, price, image });
+      });
+    });
+    
+    // Attach to main cart icon
+    const cartIcon = document.getElementById('nav-cart-btn');
+    if (cartIcon) {
+      cartIcon.addEventListener('click', openCart);
+    }
+  });
+</script>

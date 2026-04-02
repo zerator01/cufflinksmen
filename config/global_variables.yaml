@@ -1,0 +1,56 @@
+# [Your Domain Name] — 全局变量配置
+# 数据来源：seo-plan/01_site_tone.md（Single Source of Truth）
+# 更新日期：2026-04-01
+
+# ========================================
+# A. 品牌与产品基础信息
+# ========================================
+brand_name: "[Brand Name]"
+product_niche: "[Niche Name]"
+product_niche_cn: "[中文品类名]"
+domain: "example.com"
+contact_email: "info@example.com"
+wholesale_email: "wholesale@example.com"
+
+# ========================================
+# B. 产品分类（来自 site_tone.md categories）
+# ========================================
+categories:
+  - name: "Category A"
+    slug: "category-a"
+  - name: "Category B"
+    slug: "category-b"
+  - name: "Category C"
+    slug: "category-c"
+
+# ========================================
+# C. 商业参数
+# ========================================
+price_band: "$X-Y"
+free_shipping_threshold: "$50.00"
+return_policy_days: "30"
+currency: "USD"
+
+# ========================================
+# D. 材质声明（来自 site_tone.md material_tiers）
+# ========================================
+# 不要在这里编造材质描述，以 site_tone.md 的 material_tiers 为准
+material_summary: "[Material List — varies by product tier]"
+
+# ========================================
+# E. 站点定位（来自 site_tone.md positioning）
+# ========================================
+positioning: "[Core Positioning / Vibe]"
+brand_usp: "[Unique Selling Proposition]"
+
+# B2C 定位：精选站（curator）
+target_b2c: "[B2C Audience Description]"
+
+# B2B 定位：中国专业买手
+target_b2b: "[B2B Audience Description]"
+
+# ========================================
+# F. 资产配置
+# ========================================
+assets_domain: "assets.example.com"
+r2_bucket: "example-assets"

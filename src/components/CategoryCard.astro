@@ -1,0 +1,19 @@
+---
+interface Props {
+  name: string;
+  slug: string;
+  image: string;
+  alt?: string;
+  description: string;
+}
+
+const { name, slug, image, alt, description } = Astro.props;
+---
+
+<a href={`/category/${slug}`} class="category-card card">
+  <img src={image} alt={alt || name} class="card__image" loading="lazy" />
+  <div class="card__body">
+    <h3 class="card__title">{name}</h3>
+    <p class="card__text">{description}</p>
+  </div>
+</a>

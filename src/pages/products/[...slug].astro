@@ -1,0 +1,716 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import config from '../../lib/config';
+
+export async function getStaticPaths() {
+  const products = await getCollection('products');
+  return products.map(entry => ({
+    params: { slug: entry.id },
+    props: { product: entry },
+  }));
+}
+
+const { product } = Astro.props;
+const data = product.data;
+const { Content } = await render(product);
+
+// Product JSON-LD Schema
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": data.name,
+  "description": data.description,
+  "image": data.image,
+  "offers": {
+    "@type": "Offer",
+    "price": data.price,
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "url": `https://bridaljewelleryset.com/products/${product.id}`
+  }
+};
+
+const jsonLd = JSON.stringify(productSchema);
+const pageTitle = data.seo_title || data.name;
+---
+
+<BaseLayout title={pageTitle} description={data.description.slice(0, 150) + "..."} image={data.image} jsonLd={jsonLd}>
+  <!-- Minimalist Breadcrumbs -->
+  <div class="breadcrumbs container">
+    <a href="/">Home</a> <span class="divider">/</span>
+    <a href="/products">Products</a> <span class="divider">/</span>
+    <span class="current">{data.name}</span>
+  </div>
+
+  <article class="pdp section">
+    <div class="container pdp__grid">
+      <!-- Gallery Column: Editorial Portrait -->
+      <div class="pdp__gallery">
+        <div class="pdp__main-image">
+          <img src={data.image} id="main-image" alt={data.name} />
+        </div>
+        {data.gallery && data.gallery.length > 0 && (
+          <div class="pdp__thumbnails">
+            {data.gallery.map((imgUrl: string) => (
+              <button class="pdp__thumb" data-image={imgUrl}>
+                <img src={imgUrl} alt="Thumbnail view" loading="lazy" />
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <!-- Info Column: Swiss Minimalist -->
+      <div class="pdp__info">
+        <p class="pdp__collection-tag">{data.category} Collection</p>
+        <h1 class="pdp__title">{data.name}</h1>
+        <p class="pdp__price">${data.price.toFixed(2)}</p>
+
+        <div class="pdp__description">
+          <p>{data.description}</p>
+        </div>
+
+        {data.features && (
+          <ul class="pdp__features">
+            {data.features.map((feature: string) => (
+              <li>{feature}</li>
+            ))}
+          </ul>
+        )}
+
+        {data.variants && data.variants.length > 0 && (
+          <div class="pdp__variants">
+            <p class="pdp__variants-label">Select Style</p>
+            <div class="pdp__variant-options" id="variant-options">
+              {data.variants.map((v: any, i: number) => (
+                <button
+                  class={`pdp__variant-pill ${i === 0 ? 'active' : ''}`}
+                  data-price={v.price}
+                  data-image={v.image}
+                  data-value={v.value}
+                  data-label={v.label}
+                >
+                  {v.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div class="pdp__actions">
+          <button class="pdp__btn-dark js-add-to-cart" id="pdp-add-to-cart" data-id={`${product.id}-${data.variants?.[0]?.value || 'default'}`} data-name={`${data.name}${data.variants?.[0] ? ' - ' + data.variants[0].label : ''}`} data-price={data.variants?.[0]?.price || data.price} data-image={data.variants?.[0]?.image || data.image}>
+            Add to Tote - ${(data.variants?.[0]?.price || data.price).toFixed(2)}
+          </button>
+
+          <div class="pdp__trust-badges pdp__trust-badges--premium">
+            <div class="pdp__badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" class="pdp__badge-icon"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              <span>SSL Secure</span>
+            </div>
+            <div class="pdp__badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" class="pdp__badge-icon"><circle cx="12" cy="12" r="10"></circle><path d="M9 12l2 2 4-4"></path></svg>
+              <span>Verified Payment</span>
+            </div>
+            <div class="pdp__badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.75" class="pdp__badge-icon"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+              <span>{config.commerce.return_days} Day Returns</span>
+            </div>
+          </div>
+
+          <p class="pdp__guarantee">Complimentary worldwide shipping on orders exceeding ${config.commerce.free_shipping_threshold}.</p>
+        </div>
+
+        <!-- Minimal accordion for details -->
+        <div class="pdp__accordion-wrap">
+          <FaqAccordion items={[
+            {q: "Shipping & Delivery", a: `Free worldwide shipping on all orders over $${config.commerce.free_shipping_threshold}. Standard delivery takes 7-15 business days. Tracking included with every order.`},
+            {q: "Returns Policy", a: `We offer a ${config.commerce.return_days}-day return policy. Contact us within ${config.commerce.return_days} days of delivery for a full refund or exchange. Items should be unworn and in original packaging.`},
+            {q: "Materials & Care", a: "Materials vary by set — check the product description above for exact details. Store in the included box, away from moisture. Avoid contact with perfume, water, and lotions to extend the life of plated finishes."}
+          ]} id="pdp-details" />
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Rich Markdown Content Below Fold -->
+  <section class="section section--alt pdp__rich-content">
+    <div class="container" style="max-width: 800px; padding-top: var(--space-2xl);">
+      <article class="prose">
+        <Content />
+      </article>
+
+      <!-- Advanced Structural Content (Specs, Use Case, Product FAQ) -->
+      {data.use_case && (
+        <blockquote class="pdp__use-case">
+          <p>{data.use_case}</p>
+        </blockquote>
+      )}
+
+      {data.specs && Object.keys(data.specs).length > 0 && (
+        <div class="pdp__specs-section">
+          <h3>Specifications & Details</h3>
+          <div class="pdp__specs-grid">
+            {Object.entries(data.specs).map(([key, val]) => (
+              <div class="pdp__spec-item">
+                <span class="pdp__spec-key">{key}</span>
+                <span class="pdp__spec-val">{val}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {data.faq && data.faq.length > 0 && (
+        <div class="pdp__faq-section">
+          <h3>Product Frequently Asked Questions</h3>
+          <FaqAccordion items={data.faq} id="pdp-product-faq-rich" />
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Mobile Sticky CTA -->
+  <div class="pdp__sticky-cta">
+    <div class="pdp__sticky-inner">
+      <div class="pdp__sticky-info">
+        <span class="pdp__sticky-title">{data.name}</span>
+        <span class="pdp__sticky-price">${data.price.toFixed(2)}</span>
+      </div>
+      <button class="pdp__btn-dark js-add-to-cart" id="pdp-sticky-add" style="padding: 12px 24px; font-size: 0.85rem;" data-id={`${product.id}-${data.variants?.[0]?.value || 'default'}`} data-name={`${data.name}${data.variants?.[0] ? ' - ' + data.variants[0].label : ''}`} data-price={data.variants?.[0]?.price || data.price} data-image={data.variants?.[0]?.image || data.image}>Add to Tote</button>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  /* Base Layout Typography adjustments */
+  .breadcrumbs {
+    padding: var(--space-xl) 0 0 0;
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .breadcrumbs a {
+    color: var(--color-text-muted);
+    transition: color 0.3s ease;
+  }
+
+  .breadcrumbs a:hover {
+    color: var(--color-primary);
+  }
+
+  .breadcrumbs .divider {
+    color: var(--color-border);
+  }
+
+  .breadcrumbs .current {
+    color: var(--color-primary);
+    font-weight: 500;
+  }
+
+  .pdp {
+    padding-top: var(--space-lg);
+  }
+
+  .pdp__grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: var(--space-4xl);
+    align-items: start;
+  }
+
+  /* Gallery: Borderless & Cinematic */
+  .pdp__main-image {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    background: transparent;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .pdp__main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: opacity var(--transition-base);
+  }
+
+  .pdp__thumbnails {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+  }
+
+  .pdp__thumb {
+    appearance: none;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    opacity: 0.4;
+    transition: all var(--transition-base);
+  }
+
+  .pdp__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .pdp__thumb:hover, .pdp__thumb.active {
+    opacity: 1;
+  }
+
+  /* Info Column: Tight typography */
+  .pdp__info {
+    position: sticky;
+    top: calc(var(--header-height) + var(--space-xl));
+  }
+
+  .pdp__collection-tag {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-sm);
+  }
+
+  .pdp__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    color: var(--color-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .pdp__price {
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-xl);
+  }
+
+  .pdp__description {
+    color: var(--color-primary);
+    line-height: 1.6;
+    margin-bottom: var(--space-2xl);
+    font-size: 1.05rem;
+  }
+
+  /* Minimalist Features */
+  .pdp__features {
+    margin-bottom: var(--space-2xl);
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .pdp__features li {
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .pdp__features li::before {
+    content: "—";
+    margin-right: 12px;
+    color: var(--color-text-light);
+  }
+
+  /* Sharp Variant Selection */
+  .pdp__variants {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .pdp__variants-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .pdp__variant-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .pdp__variant-pill {
+    appearance: none;
+    background: transparent;
+    border: 1px solid var(--color-border);
+    padding: 12px 24px;
+    font-size: 0.85rem;
+    font-family: var(--font-body);
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--color-primary);
+    letter-spacing: 0.05em;
+  }
+
+  .pdp__variant-pill:hover {
+    border-color: var(--color-primary);
+  }
+
+  .pdp__variant-pill.active {
+    border-color: var(--color-primary);
+    background: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  /* High-end Dark Button */
+  .pdp__btn-dark {
+    width: 100%;
+    appearance: none;
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 18px 32px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+
+  .pdp__btn-dark:hover {
+    background: #222;
+  }
+  
+  .pdp__btn-dark:active {
+    transform: scale(0.98);
+  }
+
+  /* Trust Badges - Premium Geometric Aesthetic */
+  .pdp__trust-badges--premium {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: var(--space-xl);
+    padding-top: var(--space-xl);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .pdp__badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+  }
+
+  .pdp__badge-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--color-text);
+  }
+
+  .pdp__badge span {
+    font-size: 0.6rem;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    text-align: center;
+  }
+
+  .pdp__guarantee {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+    margin-top: var(--space-lg);
+  }
+
+  .pdp__accordion-wrap {
+    margin-top: var(--space-2xl);
+  }
+
+  /* Sticky CTA Mobile */
+  .pdp__sticky-cta {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    padding: var(--space-sm) var(--space-md);
+    box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.05);
+    z-index: 100;
+  }
+
+  .pdp__sticky-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-md);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .pdp__sticky-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pdp__sticky-title {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .pdp__sticky-price {
+    font-size: 1rem;
+    color: var(--color-primary);
+  }
+
+  @media (max-width: 1024px) {
+    .pdp__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .pdp__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+    }
+    .pdp__info {
+      position: static;
+    }
+    .pdp__title {
+      font-size: 2.5rem;
+    }
+    .pdp__trust-badges {
+      flex-wrap: wrap;
+      gap: var(--space-lg);
+    }
+    .pdp__sticky-cta {
+      display: block;
+    }
+    .pdp__rich-content {
+      padding-bottom: 6rem;
+    }
+  }
+
+  /* Rich Specs & Use Case Styling */
+  .pdp__use-case {
+    margin: var(--space-3xl) 0;
+    padding: var(--space-xl);
+    border-left: 1px solid var(--color-border);
+    position: relative;
+    background: #fdfdfd;
+  }
+  
+  .pdp__use-case::before {
+    content: "WHO IS IT FOR";
+    display: block;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-md);
+  }
+
+  .pdp__use-case p {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--color-text-dark);
+    margin: 0;
+  }
+
+  .pdp__specs-section,
+  .pdp__faq-section {
+    margin-top: var(--space-3xl);
+    padding-top: var(--space-xl);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .pdp__specs-section h3,
+  .pdp__faq-section h3 {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-xl);
+    color: var(--color-text-dark);
+    font-weight: 500;
+  }
+
+  .pdp__specs-grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pdp__spec-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--color-border-subtle, #f0f0f0);
+  }
+
+  .pdp__spec-item:last-child {
+    border-bottom: none;
+  }
+
+  .pdp__spec-key {
+    font-weight: 500;
+    color: var(--color-text-dark);
+    font-size: 0.85rem;
+    flex: 1;
+  }
+
+  .pdp__spec-val {
+    color: var(--color-text-light);
+    font-size: 0.85rem;
+    flex: 2;
+    text-align: right;
+  }
+
+  /* Editorial Markdown Separation — :global needed to pierce into <Content /> */
+  .pdp__rich-content :global(.prose h2) {
+    font-size: 2.25rem;
+    font-weight: 300;
+    margin-top: 0;
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--color-border);
+    letter-spacing: -0.02em;
+  }
+
+  /* Lead paragraph styling for the text immediately following H2 */
+  .pdp__rich-content :global(.prose h2 + p),
+  .pdp__rich-content :global(.prose h2 + p + p) {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--color-text-dark);
+    margin-bottom: var(--space-lg);
+  }
+
+  /* Fine-art H3 styling — horizontal dash prefix */
+  .pdp__rich-content :global(.prose h3) {
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-top: var(--space-3xl);
+    margin-bottom: var(--space-md);
+    color: var(--color-text-dark);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .pdp__rich-content :global(.prose h3::before) {
+    content: "";
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background-color: var(--color-text-light);
+  }
+
+  /* Body paragraphs under H3 */
+  .pdp__rich-content :global(.prose h3 + p) {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--color-text);
+  }
+
+</style>
+
+<script>
+  // Simple thumbnail gallery switcher
+  const mainImage = document.getElementById('main-image') as HTMLImageElement;
+  const thumbnails = document.querySelectorAll('.pdp__thumb');
+
+  if (mainImage && thumbnails) {
+    thumbnails.forEach(thumb => {
+      thumb.addEventListener('click', () => {
+        // Remove active class
+        thumbnails.forEach(t => t.classList.remove('active'));
+        // Add active class
+        thumb.classList.add('active');
+        // Change src
+        const newSrc = thumb.getAttribute('data-image');
+        if (newSrc) {
+          mainImage.style.opacity = '0';
+          setTimeout(() => {
+            mainImage.src = newSrc;
+            mainImage.style.opacity = '1';
+            }, 150);
+          }
+        });
+      });
+    }
+
+    // Variant Selector Logic
+    const variantBtns = document.querySelectorAll('.pdp__variant-pill');
+    const priceEl = document.querySelector('.pdp__price');
+    const addBtn = document.getElementById('pdp-add-to-cart') as HTMLButtonElement;
+    const stickyBtn = document.getElementById('pdp-sticky-add') as HTMLButtonElement;
+    const stickyPriceEl = document.querySelector('.pdp__sticky-price');
+    const productBaseName = addBtn?.getAttribute('data-name')?.split(' - ')[0] || '';
+    const productBaseId = addBtn?.getAttribute('data-id')?.split('-').slice(0,-2).join('-') || '';
+
+    variantBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        variantBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const newPrice = parseFloat(btn.getAttribute('data-price') || '0');
+        const newImage = btn.getAttribute('data-image') || '';
+        const newValue = btn.getAttribute('data-value') || '';
+        const newLabel = btn.getAttribute('data-label') || '';
+        const formattedPrice = `$${newPrice.toFixed(2)}`;
+
+        // Update display price
+        if (priceEl) priceEl.textContent = formattedPrice;
+        if (stickyPriceEl) stickyPriceEl.textContent = formattedPrice;
+
+        // Update main image
+        if (mainImage && newImage) {
+          mainImage.style.opacity = '0';
+          setTimeout(() => {
+            mainImage.src = newImage;
+            mainImage.style.opacity = '1';
+          }, 150);
+        }
+
+        // Update add-to-cart buttons
+        const newId = `${productBaseId}-${newValue}`;
+        const newName = `${productBaseName} - ${newLabel}`;
+        [addBtn, stickyBtn].forEach(b => {
+          if (!b) return;
+          b.setAttribute('data-id', newId);
+          b.setAttribute('data-name', newName);
+          b.setAttribute('data-price', newPrice.toString());
+          if (newImage) b.setAttribute('data-image', newImage);
+        });
+
+        if (addBtn) addBtn.textContent = `Add to Tote - ${formattedPrice}`;
+      });
+    });
+  </script>

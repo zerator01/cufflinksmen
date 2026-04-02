@@ -1,0 +1,184 @@
+# ========================================
+# [YOUR_SITE_NAME] — 站点配置
+# 数据来源：seo-plan/01_site_tone.md
+# 所有文案来自：content/final_website_copy.md
+# ========================================
+
+# A. 品牌信息
+brand:
+  name: "YOUR BRAND NAME"
+  gtm_id: ""
+  cf_web_analytics_token: ""
+  domain: "yourdomain.com"
+  email: "info@yourdomain.com"
+  wholesale_email: "wholesale@yourdomain.com"
+  tagline: "Your brand tagline here"
+  copyright: "© 2026 Your Brand. All rights reserved."
+  shipping_banner: "Free worldwide shipping on orders over $XX"
+
+# B. Hero 区域
+hero:
+  headline: "YOUR HERO HEADLINE"
+  subheadline: "Your hero subheadline — describe your unique value proposition here."
+  cta_text: "Shop Now"
+  cta_link: "/products"
+
+# C. 产品分类
+categories:
+  - name: "Category One"
+    slug: "category-one"
+    image: ""
+    alt: "Category one product image description"
+    description: "Description of category one."
+  - name: "Category Two"
+    slug: "category-two"
+    image: ""
+    alt: "Category two product image description"
+    description: "Description of category two."
+  - name: "Category Three"
+    slug: "category-three"
+    image: ""
+    alt: "Category three product image description"
+    description: "Description of category three."
+
+# D. Feature Blocks (3x PAS)
+features:
+  - subtitle: "Feature 1 Subtitle"
+    headline: "Feature 1 Headline"
+    description: "Feature 1 description — use PAS (Problem-Agitate-Solution) format."
+    image: ""
+    alt: "Feature 1 image description"
+  - subtitle: "Feature 2 Subtitle"
+    headline: "Feature 2 Headline"
+    description: "Feature 2 description."
+    image: ""
+    alt: "Feature 2 image description"
+  - subtitle: "Feature 3 Subtitle"
+    headline: "Feature 3 Headline"
+    description: "Feature 3 description."
+    image: ""
+    alt: "Feature 3 image description"
+
+# E. 场景导购 (Shop by Scene/Style)
+scene_navigator:
+  title: "Find Your Perfect Match"
+  subtitle: "Not sure which style suits you? Start here."
+  items:
+    - neckline: "Style A"
+      recommendation: "Recommendation for Style A"
+      link: "/products"
+    - neckline: "Style B"
+      recommendation: "Recommendation for Style B"
+      link: "/products"
+    - neckline: "Style C"
+      recommendation: "Recommendation for Style C"
+      link: "/products"
+
+# F. About Us
+about:
+  story_title: "Our Story"
+  story: "Your brand story here. Describe how you started, what you do, and why customers should trust you."
+  difference_title: "Why Choose Us"
+  difference_points:
+    - "Differentiator 1"
+    - "Differentiator 2"
+    - "Differentiator 3"
+    - "Differentiator 4"
+
+# G. Testimonials (3 B2C + 3 B2B)
+testimonials:
+  - name: "Customer A"
+    role: "Role, Location"
+    avatar: ""
+    text: "Testimonial text here."
+  - name: "Customer B"
+    role: "Role, Location"
+    avatar: ""
+    text: "Testimonial text here."
+  - name: "Customer C"
+    role: "Role, Location"
+    avatar: ""
+    text: "Testimonial text here."
+  - name: "Business D"
+    role: "Business Role, Location"
+    avatar: ""
+    text: "B2B testimonial text here."
+  - name: "Business E"
+    role: "Business Role, Location"
+    avatar: ""
+    text: "B2B testimonial text here."
+  - name: "Business F"
+    role: "Business Role, Location"
+    avatar: ""
+    text: "B2B testimonial text here."
+
+# H. FAQ (B2C only - B2B FAQ lives on /wholesale)
+faq_orders:
+  - q: "FAQ Question 1"
+    a: "Answer 1"
+  - q: "FAQ Question 2"
+    a: "Answer 2"
+  - q: "FAQ Question 3"
+    a: "Answer 3"
+
+# I. Final CTA
+final_cta:
+  headline: "Your CTA headline here."
+  subtext: "Supporting text with starting price or key benefit."
+  cta_text: "Shop Now"
+  cta_link: "/products"
+  trust_signals:
+    - "Free shipping over $XX"
+    - "30-day returns"
+    - "Secure checkout"
+
+# J. 商业参数
+commerce:
+  free_shipping_threshold: 50
+  currency: "USD"
+  return_days: 30
+
+# K. SEO
+seo:
+  title_suffix: "| Your Brand Name"
+  default_description: "Your default site meta description here."
+
+# L. 导航
+nav:
+  - label: "Shop"
+    href: "/products"
+  - label: "About"
+    href: "/about"
+  - label: "FAQ"
+    href: "/#faq"
+  - label: "Contact"
+    href: "/contact"
+
+# M. Footer 链接
+footer_links:
+  - label: "Wholesale Inquiries"
+    href: "/wholesale"
+  - label: "Privacy Policy"
+    href: "/privacy"
+  - label: "Terms of Service"
+    href: "/terms"
+
+# N. Exit Intent Popup（可开关，供站群复用）
+exit_popup:
+  enabled: false
+  badge: "STYLE GUIDE"
+  title: "Your popup title here"
+  description: "Your popup description here."
+  input_placeholder: "Your email address"
+  cta_text: "Send Me the Guide"
+  success_text: "Check your inbox! ✓"
+  micro_text: "Free PDF. No spam, ever. Unsubscribe anytime."
+  decline_text: "I'll browse on my own"
+  image: ""
+  mobile_delay_ms: 30000
+
+# O. 联系方式 (Contact)
+contact:
+  email: "hello@yourdomain.com"
+  hours: "Mon-Fri, 9:00 AM - 6:00 PM (GMT+8)"
+  address: "Your City, Country"

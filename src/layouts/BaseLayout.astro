@@ -1,0 +1,73 @@
+---
+import config from '../lib/config';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CartDrawer from '../components/CartDrawer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  jsonLd?: string;
+}
+
+const {
+  title = config.brand.name,
+  description = config.seo.default_description,
+  image = '/images/og-default.png',
+  jsonLd,
+} = Astro.props;
+
+const fullTitle = title === config.brand.name
+  ? title
+  : `${title} ${config.seo.title_suffix}`;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={image} />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <title>{fullTitle}</title>
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="canonical" href={`https://${config.brand.domain}${Astro.url.pathname}`} />
+
+  {config.brand.gtm_id && (
+    <script define:vars={{ id: config.brand.gtm_id }}>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer',id);
+    </script>
+  )}
+
+  {config.brand.cf_web_analytics_token && (
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={`{"token": "${config.brand.cf_web_analytics_token}"}`}></script>
+  )}
+
+  {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
+</head>
+<body>
+  {config.brand.gtm_id && (
+    <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${config.brand.gtm_id}`}
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  )}
+  <Header />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+  <CartDrawer />
+</body>
+</html>

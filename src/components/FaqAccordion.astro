@@ -1,0 +1,82 @@
+---
+interface FaqItem {
+  q: string;
+  a: string;
+}
+
+interface Props {
+  items: FaqItem[];
+  id?: string;
+}
+
+const { items, id = 'faq' } = Astro.props;
+---
+
+<div class="accordion" id={id}>
+  {items.map((item, i) => (
+    <details class="accordion__item">
+      <summary class="accordion__header">
+        <span>{item.q}</span>
+        <svg class="accordion__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </summary>
+      <div class="accordion__body">
+        <p>{item.a}</p>
+      </div>
+    </details>
+  ))}
+</div>
+
+<style>
+  .accordion {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .accordion__item {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .accordion__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding: var(--space-lg) 0;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: var(--font-size-base);
+    color: var(--color-primary);
+    transition: color var(--transition-base);
+    list-style: none;
+  }
+
+  .accordion__header::-webkit-details-marker {
+    display: none;
+  }
+
+  .accordion__header:hover {
+    color: var(--color-accent);
+  }
+
+  .accordion__icon {
+    flex-shrink: 0;
+    transition: transform var(--transition-base);
+    color: var(--color-text-muted);
+  }
+
+  details[open] .accordion__icon {
+    transform: rotate(180deg);
+  }
+
+  .accordion__body {
+    padding: 0 0 var(--space-lg);
+  }
+
+  .accordion__body p {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    line-height: 1.8;
+  }
+</style>
