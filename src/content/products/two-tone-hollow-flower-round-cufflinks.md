@@ -11,7 +11,7 @@ gallery:
   - "https://assets.cufflinksmen.com/products/two-tone-hollow-flower-round-cufflinks/banner-4.webp"
   - "https://assets.cufflinksmen.com/products/two-tone-hollow-flower-round-cufflinks/banner-5.webp"
   - "https://assets.cufflinksmen.com/products/two-tone-hollow-flower-round-cufflinks/banner-6.webp"
-category: "cufflinks"
+category: "Novelty Cufflinks Men"
 status: "published"
 features:
   - "Two-tone gold and silver plating on a zinc alloy base for durable everyday wear"
