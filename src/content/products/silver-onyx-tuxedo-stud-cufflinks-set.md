@@ -7,7 +7,7 @@ description: "A complete formal ensemble in hand: six round onyx studs and two m
 image: "https://assets.cufflinksmen.com/products/silver-onyx-tuxedo-stud-cufflinks-set/banner-4.webp"
 gallery:
   - "https://assets.cufflinksmen.com/products/silver-onyx-tuxedo-stud-cufflinks-set/banner-5.webp"
-category: "Gold Plated Bridal Jewellery Sets"
+category: "Silver Cufflinks Men"
 status: "published"
 features:
   - "Set of 6 onyx studs and 2 cuff links in matching silver-tone brass casings"

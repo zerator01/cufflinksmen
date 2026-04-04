@@ -9,7 +9,7 @@ gallery:
   - "https://assets.cufflinksmen.com/products/vintage-owl-crystal-cufflinks-ancient-silver/banner-3.webp"
   - "https://assets.cufflinksmen.com/products/vintage-owl-crystal-cufflinks-ancient-silver/banner-4.webp"
   - "https://assets.cufflinksmen.com/products/vintage-owl-crystal-cufflinks-ancient-silver/banner-5.webp"
-category: "Crystal Bridal Jewellery Sets"
+category: "Novelty Cufflinks Men"
 status: "published"
 features:
   - "Five owl silhouette designs with hand-set crystal glass inlay"
