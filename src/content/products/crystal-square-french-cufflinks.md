@@ -8,7 +8,7 @@ gallery:
   - "https://assets.cufflinksmen.com/products/crystal-square-french-cufflinks/banner-2.webp"
   - "https://assets.cufflinksmen.com/products/crystal-square-french-cufflinks/banner-3.webp"
   - "https://assets.cufflinksmen.com/products/crystal-square-french-cufflinks/banner-4.webp"
-category: "Gold Plated Bridal Jewellery Sets"
+category: "Silver Cufflinks Men"
 status: "published"
 features:
   - "Faceted crystal stones set in gold-tone alloy for a sharp, light-refracting focal point"

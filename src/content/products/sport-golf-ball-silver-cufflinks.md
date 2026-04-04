@@ -9,7 +9,7 @@ gallery:
   - "https://assets.cufflinksmen.com/products/sport-golf-ball-silver-cufflinks/banner-3.webp"
   - "https://assets.cufflinksmen.com/products/sport-golf-ball-silver-cufflinks/banner-4.webp"
   - "https://assets.cufflinksmen.com/products/sport-golf-ball-silver-cufflinks/banner-5.webp"
-category: "cufflinks"
+category: "Silver Cufflinks Men"
 status: "published"
 features:
   - "Solid brass core with tarnish-resistant silver-color plating"

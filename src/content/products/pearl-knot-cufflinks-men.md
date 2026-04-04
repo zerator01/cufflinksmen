@@ -9,7 +9,7 @@ gallery:
   - "https://assets.cufflinksmen.com/products/pearl-knot-cufflinks-men/banner-3.webp"
   - "https://assets.cufflinksmen.com/products/pearl-knot-cufflinks-men/banner-4.webp"
   - "https://assets.cufflinksmen.com/products/pearl-knot-cufflinks-men/banner-5.webp"
-category: "Gold Plated Bridal Jewellery Sets"
+category: "Gold Cufflinks Men"
 status: "published"
 features:
   - "Simulated-pearl face delivers lustrous depth without the fragility of natural pearl"

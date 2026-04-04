@@ -9,7 +9,7 @@ gallery:
   - "https://assets.cufflinksmen.com/products/knot-cufflinks-men-gold-silver-plated-business-wedding/banner-3.webp"
   - "https://assets.cufflinksmen.com/products/knot-cufflinks-men-gold-silver-plated-business-wedding/banner-4.webp"
   - "https://assets.cufflinksmen.com/products/knot-cufflinks-men-gold-silver-plated-business-wedding/banner-5.webp"
-category: "cufflinks"
+category: "Gold Cufflinks Men"
 status: "published"
 features:
   - "Overhand knot silhouette — a timeless design that sits with purpose on the cuff"
