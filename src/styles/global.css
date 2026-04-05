@@ -1,32 +1,32 @@
 /* ========================================
-   Bridal Jewellery Set — 设计系统
-   哲学: Accessible Sparkle（触手可及的闪耀）
-   字体: Cormorant (标题) + Montserrat (正文)
-   色板: Warm Neutral + Champagne Gold
+   Cufflinks Men — 设计系统
+   哲学: Forged Detail (锻造细节)
+   字体: Outfit (标题) + Inter (正文)
+   色板: Deep Charcoal + Warm Amber + Metallic Silver Hint
    ======================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
 
 /* ── CSS Custom Properties ── */
 :root {
   /* Colors */
-  --color-primary: #0A0A0A;
-  --color-secondary: #212121;
-  --color-accent: #D4AF37;
-  --color-accent-hover: #B6952F;
-  --color-bg: #FAFAF9;
-  --color-bg-alt: #F5F5F4;
-  --color-bg-dark: #0A0A0A;
-  --color-text: #171717;
-  --color-text-muted: #737373;
-  --color-text-light: #A3A3A3;
-  --color-text-on-dark: #FAFAF9;
-  --color-border: #E5E5E5;
+  --color-primary: #1C1C1E; /* Deep Charcoal */
+  --color-secondary: #2C2C2E;
+  --color-accent: #B8860B; /* Deep Amber */
+  --color-accent-hover: #9B700A;
+  --color-bg: #F4F4F5; /* Zync metallic hint for main body */
+  --color-bg-alt: #E5E5EA; /* Subtle contrast */
+  --color-bg-dark: #1C1C1E; /* Full inverted mode */
+  --color-text: #1C1C1E; /* High contrast text */
+  --color-text-muted: #52525B; /* Zinc Muted */
+  --color-text-light: #A1A1AA;
+  --color-text-on-dark: #F4F4F5;
+  --color-border: #D4D4D8;
   --color-white: #FFFFFF;
 
   /* Typography */
-  --font-heading: 'Cormorant', Georgia, serif;
-  --font-body: 'Outfit', 'Segoe UI', sans-serif;
+  --font-heading: 'Outfit', 'Segoe UI', sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
@@ -36,7 +36,7 @@
   --font-size-3xl: 2rem;
   --font-size-4xl: 2.5rem;
   --font-size-5xl: 3.5rem;
-  --font-size-hero: clamp(2.5rem, 6vw, 5rem);
+  --font-size-hero: clamp(2.5rem, 6vw, 4.5rem);
 
   /* Spacing */
   --space-xs: 0.25rem;
@@ -47,23 +47,25 @@
   --space-2xl: 3rem;
   --space-3xl: 4rem;
   --space-4xl: 6rem;
-  --space-section: 5rem;
+  --space-section: 6rem; /* Slightly larger for layout breathing room */
 
   /* Layout */
   --max-width: 1200px;
   --header-height: 80px;
-  --border-radius: 4px;
-  --border-radius-lg: 8px;
+  
+  /* Apple-machined precision radius */
+  --border-radius: 2px;
+  --border-radius-lg: 2px;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-  --shadow-lg: 0 10px 30px rgba(0,0,0,0.1);
-  --shadow-hover: 0 15px 40px rgba(0,0,0,0.15);
+  /* Shadows - Tighter drops simulating forged heavy weight */
+  --shadow-sm: 0 1px 2px rgba(28,28,30,0.1);
+  --shadow-md: 0 4px 6px -1px rgba(28,28,30,0.1), 0 2px 4px -1px rgba(28,28,30,0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(28,28,30,0.1), 0 4px 6px -2px rgba(28,28,30,0.05);
+  --shadow-hover: 0 15px 25px -5px rgba(28,28,30,0.15), 0 0 0 1px rgba(28,28,30,0.02);
 
   /* Animations */
-  --transition-base: 0.3s ease;
-  --transition-slow: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-base: 0.25s ease-out;
+  --transition-slow: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ── Reset ── */
@@ -73,9 +75,9 @@
   padding: 0;
 }
 
-/* Image Fallbacks to prevent raw alt-text layout bleeding */
+/* Image Fallbacks */
 img {
-  color: transparent; /* hides alt text if image 404s */
+  color: transparent;
   font-size: 0;
 }
 
@@ -89,7 +91,7 @@ body {
   font-family: var(--font-body);
   font-size: var(--font-size-base);
   font-weight: 400;
-  line-height: 1.7;
+  line-height: 1.6;
   color: var(--color-text);
   background-color: var(--color-bg);
 }
@@ -110,13 +112,14 @@ ul, ol { list-style: none; }
 /* ── Typography ── */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  font-weight: 500; /* Sophisticated medium weight instead of generic 600 */
-  line-height: 1.15;
+  font-weight: 600; /* Bolder, geometric feel */
+  line-height: 1.1;
   color: var(--color-primary);
-  letter-spacing: -0.03em; /* Slightly tighter globally for serif elegance */
+  letter-spacing: -0.02em; /* Precision spacing */
+  margin-bottom: var(--space-md);
 }
 
-h1 { font-size: var(--font-size-hero); }
+h1 { font-size: var(--font-size-hero); letter-spacing: -0.03em; }
 h2 { font-size: var(--font-size-4xl); }
 h3 { font-size: var(--font-size-3xl); }
 h4 { font-size: var(--font-size-2xl); }
@@ -148,19 +151,20 @@ p { margin-bottom: var(--space-md); }
 }
 
 .section--alt {
-  background-color: var(--color-bg-alt);
+  background-color: var(--color-white); /* Pure white contrast block against zinc body */
 }
 
 .section__header {
-  text-align: center;
+  text-align: left; /* Shift from center to left for more mechanical rigidity */
   margin-bottom: var(--space-3xl);
+  max-width: 800px;
 }
 
 .section__subtitle {
   font-family: var(--font-body);
   font-size: var(--font-size-sm);
-  font-weight: 600;
-  letter-spacing: 0.15em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-accent);
   margin-bottom: var(--space-sm);
@@ -171,11 +175,9 @@ p { margin-bottom: var(--space-md); }
 }
 
 .section__description {
-  max-width: 680px;
-  margin: 0 auto;
   color: var(--color-text-muted);
   font-size: var(--font-size-lg);
-  line-height: 1.8;
+  line-height: 1.7;
 }
 
 /* ── Grid ── */
@@ -198,8 +200,7 @@ p { margin-bottom: var(--space-md); }
   font-family: var(--font-body);
   font-size: var(--font-size-sm);
   font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.05em;
   border: none;
   border-radius: var(--border-radius);
   cursor: pointer;
@@ -209,16 +210,17 @@ p { margin-bottom: var(--space-md); }
 
 .btn--primary {
   background-color: var(--color-accent);
-  color: var(--color-white);
+  color: var(--color-primary); /* Dark text on amber for maximum legible impact */
 }
 
 .btn--primary:hover {
   background-color: var(--color-accent-hover);
   transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
 .btn--primary:active {
-  transform: translateY(0) scale(0.98);
+  transform: translateY(0);
 }
 
 .btn--outline {
@@ -229,11 +231,7 @@ p { margin-bottom: var(--space-md); }
 
 .btn--outline:hover {
   border-color: var(--color-primary);
-  transform: translateY(-1px);
-}
-
-.btn--outline:active {
-  transform: translateY(0) scale(0.98);
+  background: var(--color-bg-alt);
 }
 
 .btn--white {
@@ -243,29 +241,20 @@ p { margin-bottom: var(--space-md); }
 
 .btn--white:hover {
   background: var(--color-bg-alt);
-  transform: translateY(-1px);
 }
 
-.btn--white:active {
-  transform: translateY(0) scale(0.98);
-}
-
+/* Forged specific heavy button */
 .btn--solid-dark {
-  background: var(--color-primary); /* Off-black */
+  background: var(--color-primary); /* Deep Charcoal */
   color: var(--color-white);
   border: 1px solid var(--color-primary);
-  letter-spacing: 0.12em; /* Luxurious spacing for small sans caps */
+  letter-spacing: 0.08em;
   font-weight: 500;
 }
 
 .btn--solid-dark:hover {
   background: transparent;
   color: var(--color-primary);
-  transform: translateY(0); /* Remove jumpy transforms for elegance */
-}
-
-.btn--solid-dark:active {
-  transform: scale(0.98);
 }
 
 .btn--large {
@@ -280,21 +269,24 @@ p { margin-bottom: var(--space-md); }
   overflow: hidden;
   transition: all var(--transition-base);
   box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
 }
 
 .card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
+  border-color: var(--color-text-light);
 }
 
 .card__image {
   width: 100%;
-  aspect-ratio: 7 / 4;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .card__body {
-  padding: var(--space-lg) var(--space-xl);
+  padding: var(--space-lg);
 }
 
 .card__title {
@@ -305,14 +297,14 @@ p { margin-bottom: var(--space-md); }
 .card__text {
   color: var(--color-text-muted);
   font-size: var(--font-size-sm);
-  line-height: 1.7;
+  line-height: 1.6;
 }
 
 /* ── Animations ── */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -326,11 +318,11 @@ p { margin-bottom: var(--space-md); }
 }
 
 .animate-fade-in-up {
-  animation: fadeInUp 0.6s ease-out forwards;
+  animation: fadeInUp 0.5s ease-out forwards;
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.6s ease-out forwards;
+  animation: fadeIn 0.5s ease-out forwards;
 }
 
 /* stagger delays */
@@ -347,7 +339,7 @@ p { margin-bottom: var(--space-md); }
 
 @media (max-width: 768px) {
   :root {
-    --space-section: 3.5rem;
+    --space-section: 4rem;
     --header-height: 64px;
   }
 

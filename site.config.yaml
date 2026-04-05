@@ -80,13 +80,13 @@ scene_navigator:
 # F. About Us
 about:
   story_title: "Our Story"
-  story: "We started with a question most men ask once and never again: where do you actually buy decent cufflinks without getting ripped off? We're a small sourcing team based in China's accessories manufacturing hub. We spend our days visiting factories, inspecting samples, and rejecting anything with a weak clasp, a cheap plating, or a price that doesn't make sense. We don't design. We don't manufacture. We select — carefully."
+  story: "We're a cufflink factory based in Guangzhou — China's accessories manufacturing capital. We make our own molds, run our own production lines, and test every clasp before it leaves the floor. For years we supplied department stores, Amazon sellers, and wedding rental companies. They'd buy from us at $3 and sell at $40. We figured: why not sell direct? Same factory. Same quality. No middleman. That's this store."
   difference_title: "Why Choose Us"
   difference_points:
-    - "Curated, not mass-listed: We reject most samples we receive. Only pairs with solid mechanisms and honest finishes make the cut."
+    - "Factory direct: You're buying from the people who actually make the product. No resellers, no importers, no mystery markup."
     - "Materials stated plainly: Every product page tells you exactly what the cufflink is made of — alloy, stainless steel, plated, or sterling. No mystery metals."
-    - "Mechanisms that hold: We test every clasp type — bullet-back, whale-back, and fixed — before listing. A cufflink that pops open is a cufflink we won't sell."
-    - "Free shipping over $35: We ship worldwide. Most orders arrive within 7-15 business days."
+    - "We test every clasp: Bullet-back, whale-back, and fixed — we test each mechanism on our QC line before it ships. A cufflink that pops open doesn't leave the factory."
+    - "Free shipping over $35: We ship worldwide from our Guangzhou facility. Most orders arrive within 7-15 business days."
 
 # G. Testimonials (3 B2C + 3 B2B)
 testimonials:

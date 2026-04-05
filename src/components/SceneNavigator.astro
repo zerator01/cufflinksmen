@@ -4,22 +4,29 @@ import config from '../lib/config';
 const nav = config.scene_navigator;
 ---
 
-<section class="scene-nav" id="shop-by-neckline">
-  <div class="container">
-    <div class="scene-nav__header">
-      <p class="section__subtitle">Style Guide</p>
-      <h2 class="section__title">{nav.title}</h2>
-      <p class="section__description">{nav.subtitle}</p>
+<section class="scene-nav" id="shop-by-occasion">
+  <div class="container container--split">
+    <!-- Left Column: Image -->
+    <div class="scene-nav__image-wrapper">
+      <img src="/images/occasion-guide.webp" alt="Cufflink styles for different occasions" class="scene-nav__image" loading="lazy" />
     </div>
-    <div class="scene-nav__grid">
-      {nav.items.map((item: any) => (
-        <a href={item.link} class="scene-nav__card">
-          <div class="scene-nav__icon">
+
+    <!-- Right Column: Content -->
+    <div class="scene-nav__content">
+      <div class="scene-nav__header">
+        <p class="section__subtitle">STYLE GUIDE</p>
+        <h2 class="section__title">{nav.title}</h2>
+        <p class="section__description">{nav.subtitle}</p>
+      </div>
+
+      <ul class="scene-nav__list">
+        {nav.items.map((item: any) => (
+          <li class="scene-nav__row">
             <span class="scene-nav__neckline">{item.neckline}</span>
-          </div>
-          <p class="scene-nav__rec">{item.recommendation}</p>
-        </a>
-      ))}
+            <span class="scene-nav__rec">{item.recommendation}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   </div>
 </section>
@@ -30,69 +37,120 @@ const nav = config.scene_navigator;
     background: var(--color-bg-alt, #faf9f7);
   }
 
-  .scene-nav__header {
-    text-align: center;
-    margin-bottom: var(--space-3xl);
-  }
-
-  .scene-nav__grid {
+  .container--split {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: var(--space-xl);
-    max-width: 960px;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4xl);
+    align-items: center;
+    max-width: 1200px;
     margin: 0 auto;
   }
 
-  .scene-nav__card {
+  /* Left Side Image */
+  .scene-nav__image-wrapper {
+    position: relative;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    /* Soft shadow to lift it off the background */
+    box-shadow: var(--shadow-lg);
+  }
+
+  .scene-nav__image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 4 / 5;
+  }
+
+  /* Right Side Content */
+  .scene-nav__content {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: var(--space-xl) var(--space-lg);
-    border-radius: 12px;
-    background: white;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-    text-decoration: none;
-    color: inherit;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .scene-nav__card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  }
-
-  .scene-nav__icon {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #f5e6d3, #e8d5c0);
-    display: flex;
-    align-items: center;
     justify-content: center;
+  }
+
+  .scene-nav__header {
+    margin-bottom: var(--space-2xl);
+    text-align: left;
+  }
+
+  .section__subtitle {
+    color: var(--color-accent);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-xs);
+  }
+
+  .section__title {
+    font-size: var(--font-size-3xl);
     margin-bottom: var(--space-md);
+    line-height: 1.2;
+    color: var(--color-primary);
+  }
+
+  .section__description {
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+  }
+
+  /* Table Style List */
+  .scene-nav__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .scene-nav__row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-md);
+    padding: var(--space-lg) 0;
+    border-bottom: 1px solid var(--color-border);
+    align-items: center;
   }
 
   .scene-nav__neckline {
     font-family: var(--font-heading);
-    font-size: var(--font-size-sm);
-    font-weight: 600;
-    color: var(--color-text-dark, #1c1917);
-    text-align: center;
-    line-height: 1.2;
+    font-size: var(--font-size-md);
+    font-weight: 500;
+    color: var(--color-primary);
   }
 
   .scene-nav__rec {
     font-size: var(--font-size-sm);
-    color: var(--color-text-muted, #78716c);
-    text-align: center;
+    color: var(--color-text-muted);
     line-height: 1.5;
-    margin: 0;
   }
 
-  @media (max-width: 768px) {
-    .scene-nav__grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-md);
+  /* Responsive Design */
+  @media (max-width: 992px) {
+    .container--split {
+      grid-template-columns: 1fr;
+      gap: var(--space-3xl);
+    }
+
+    .scene-nav__image-wrapper {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .scene-nav__header {
+      text-align: center;
+    }
+
+    .scene-nav__row {
+      grid-template-columns: 1fr;
+      gap: var(--space-xs);
+      padding: var(--space-md) 0;
+    }
+
+    .scene-nav__neckline {
+      font-size: var(--font-size-base);
+      margin-bottom: var(--space-xs);
     }
   }
 </style>
