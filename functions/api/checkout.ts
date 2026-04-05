@@ -1,16 +1,9 @@
-// Stripe Checkout Session API
-// POST /api/checkout
-// 接收购物车 items，创建 Stripe Checkout Session，返回 checkout URL
-
-export const prerender = false; // 必须是 SSR，不能预渲染
-
-import type { APIRoute } from 'astro';
+// @ts-nocheck
 import Stripe from 'stripe';
 
-const STRIPE_SECRET_KEY = import.meta.env.STRIPE_SECRET_KEY;
-
-export const POST: APIRoute = async ({ request }) => {
-  // 1. 验证 Stripe Key
+export async function onRequestPost({ request, env }) {
+  const STRIPE_SECRET_KEY = env.STRIPE_SECRET_KEY;
+  
   if (!STRIPE_SECRET_KEY) {
     return new Response(
       JSON.stringify({ error: 'Stripe not configured. Please set STRIPE_SECRET_KEY.' }),
@@ -21,7 +14,6 @@ export const POST: APIRoute = async ({ request }) => {
   const stripe = new Stripe(STRIPE_SECRET_KEY);
 
   try {
-    // 2. 解析购物车
     const { items } = await request.json();
 
     if (!items || items.length === 0) {
@@ -31,30 +23,24 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // 3. 构建 Stripe line_items
-    const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = items.map(
-      (item: { name: string; price: number; qty: number; image?: string }) => ({
+    const line_items = items.map(
+      (item) => ({
         price_data: {
           currency: 'usd',
           product_data: {
             name: item.name,
             ...(item.image ? { images: [item.image] } : {}),
           },
-          unit_amount: Math.round(item.price * 100), // Stripe 用分为单位
+          unit_amount: Math.round(item.price * 100),
         },
         quantity: item.qty,
       })
     );
 
-    // 4. 计算是否达到免运费门槛
-    const subtotal = items.reduce(
-      (sum: number, item: { price: number; qty: number }) => sum + item.price * item.qty,
-      0
-    );
+    const subtotal = items.reduce((sum, item) => sum + item.price * item.qty, 0);
     const FREE_SHIPPING_THRESHOLD = 50;
 
-    // 5. 如果没达到免运费门槛，加运费（可选）
-    const shipping_options: Stripe.Checkout.SessionCreateParams.ShippingOption[] = [];
+    const shipping_options = [];
     if (subtotal >= FREE_SHIPPING_THRESHOLD) {
       shipping_options.push({
         shipping_rate_data: {
@@ -90,7 +76,6 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // 6. 创建 Checkout Session
     const origin = new URL(request.url).origin;
 
     const session = await stripe.checkout.sessions.create({
@@ -112,11 +97,11 @@ export const POST: APIRoute = async ({ request }) => {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
-  } catch (err: any) {
+  } catch (err) {
     console.error('Stripe Checkout error:', err);
     return new Response(
       JSON.stringify({ error: err.message || 'Failed to create checkout session.' }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }
-};
+}
