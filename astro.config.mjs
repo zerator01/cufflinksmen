@@ -5,5 +5,7 @@ import cloudflare from '@astrojs/cloudflare';
 // https://astro.build/config
 export default defineConfig({
     site: 'https://cufflinksmen.com',
-    integrations: [sitemap()]
+    output: 'static',
+    integrations: [sitemap()],
+    adapter: cloudflare({ imageService: 'cloudflare' })
 });
