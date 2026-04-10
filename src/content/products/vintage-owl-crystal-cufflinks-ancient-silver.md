@@ -70,7 +70,7 @@ Owls have occupied coat of arms, watch towers, and now cufflink designs for cent
 
 ### Built to Last, Designed to Be Noticed
 
-The ancient silver finish isn't just aesthetic — it is a tarnish-resistant alloy plating that holds up to repeated wear better than standard polished silver. The base metal provides enough heft (28 g per pair) to give the cufflink a proper drape along your shirt cuff without bulk. At 14 mm wide and 18 mm tall, the proportions sit correctly on most standard men's dress shirt cuffs without overhang or undersizing. The butterfly clasp mechanism engages with a firm click — secure enough for all-day wear, easy enough for one-handed removal.
+The ancient silver finish isn't just aesthetic — it is a durable alloy plating that holds up to repeated wear better than standard polished silver. The base metal provides enough heft (28 g per pair) to give the cufflink a proper drape along your shirt cuff without bulk. At 14 mm wide and 18 mm tall, the proportions sit correctly on most standard men's dress shirt cuffs without overhang or undersizing. The butterfly clasp mechanism engages with a firm click — secure enough for all-day wear, easy enough for one-handed removal.
 
 ![Close-up of butterfly clasp structure showing alloy material and ancient silver plating luster with size reference](https://assets.cufflinksmen.com/products/vintage-owl-crystal-cufflinks-ancient-silver/feature-2.webp)
 

@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import config from '../lib/config';
+
+// Reusing FAQ data 
+const faqData = config.faq_orders;
+const seoTitle = "Customer Help & FAQ";
+---
+
+<BaseLayout title={seoTitle} description="Find answers to your questions about shipping, returns, and track your bridal jewellery order.">
+  <div class="container section">
+    
+    <div class="legal-content">
+      <h1 class="page-title">Customer Help</h1>
+      <p class="subtitle">Everything you need to know about shipping, returns, and your orders.</p>
+    </div>
+
+    <!-- Shipping Section -->
+    <div class="help-section" id="shipping">
+      <div class="help-section__header">
+        <h2>Shipping Information</h2>
+      </div>
+      <div class="help-section__content">
+        <p><strong>Do you offer free shipping?</strong></p>
+        <p>Yes — free worldwide shipping on all orders over $50. Orders under $50 have a flat shipping rate shown at checkout.</p>
+        
+        <p><strong>How long does delivery take?</strong></p>
+        <p>Most orders ship within 1-3 business days. Standard delivery takes 7-15 business days depending on your location. Delivery times may vary slightly during peak wedding season or major holidays.</p>
+        
+        <p><strong>Can I track my order?</strong></p>
+        <p>Absolutely. You'll receive a tracking number via email once your order ships. Please allow 24-48 hours for the tracking link to activate in our courier's system.</p>
+      </div>
+    </div>
+
+    <!-- Returns Section -->
+    <div class="help-section" id="returns">
+      <div class="help-section__header">
+        <h2>Return Policy</h2>
+      </div>
+      <div class="help-section__content">
+        <p><strong>What's your return policy?</strong></p>
+        <p>We offer a 30-day return policy. If you're not fully satisfied with your set, you can request a return within 30 days of receiving your package.</p>
+        
+        <p><strong>Condition for Returns</strong></p>
+        <p>To be eligible for a return, items must be unworn, in their original condition, and safely packed in the original jewelry box. For hygiene reasons, pierced earrings that have been worn cannot be returned unless damaged during transit.</p>
+        
+        <p><strong>How do I start a return?</strong></p>
+        <p>Please email us at <a href={`mailto:${config.brand.email}`}>{config.brand.email}</a> with your order number. We will provide you with the return warehouse address and instructions. Please note that return shipping costs are the responsibility of the customer.</p>
+        
+        <p><strong>Damaged or Incorrect Items?</strong></p>
+        <p>If your order arrives damaged or incorrect, please email us within 48 hours of delivery with a photo of the item, and we will send a free replacement immediately.</p>
+      </div>
+    </div>
+
+    <!-- General FAQ Section -->
+    <div class="help-section" id="faq">
+      <div class="help-section__header">
+        <h2>Frequently Asked Questions</h2>
+      </div>
+      <div class="help-section__content">
+        <FaqAccordion items={faqData} id="faq-help" />
+      </div>
+    </div>
+
+    <div class="help-footer">
+      <p>Still need help? Email our support team at <a href={`mailto:${config.brand.email}`}><strong>{config.brand.email}</strong></a></p>
+      <a href="/products" class="btn btn--primary">Return to Shop</a>
+    </div>
+
+  </div>
+</BaseLayout>
+
+<style>
+  .page-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 1rem;
+    font-weight: 400;
+  }
+  
+  .subtitle {
+    font-size: var(--body-lg);
+    color: var(--color-text-light);
+    margin-bottom: 4rem;
+  }
+
+  .help-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    border-top: 1px solid var(--color-border);
+    padding: 4rem 0;
+  }
+
+  @media (min-width: 768px) {
+    .help-section {
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+    }
+  }
+
+  .help-section__header h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 400;
+    position: sticky;
+    top: 2rem;
+  }
+
+  .help-section__content {
+    font-size: var(--body-md);
+    color: var(--color-text-muted);
+  }
+
+  .help-section__content p {
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+  }
+
+  .help-section__content p strong {
+    color: var(--color-text);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .help-footer {
+    border-top: 1px solid var(--color-border);
+    padding: 4rem 0;
+    text-align: center;
+  }
+
+  .help-footer p {
+    font-size: var(--body-lg);
+    margin-bottom: 2rem;
+  }
+</style>

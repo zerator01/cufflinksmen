@@ -11,6 +11,7 @@ const productsCollection = defineCollection({
     image: z.string(),
     gallery: z.array(z.string()).optional(),
     category: z.string(),
+    status: z.enum(['published', 'draft']).optional(),
     features: z.array(z.string()).optional(),
     specs: z.record(z.string(), z.string()).optional(),
     faq: z.array(z.object({

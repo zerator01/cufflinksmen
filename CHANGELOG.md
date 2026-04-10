@@ -1,5 +1,16 @@
 # Cufflinksmen 修改记录
 
+## 2026-04-10 — 升级适配 2C_Boutique_Scaffold_V2 (v2.0.0) 架构
+
+### 具体改动
+- **前端架构更新**：将 `src/` 中的核心组件与布局模板升级至 V2 最新版，全面增强功能（包含新增的弹窗意图拦截组件、更丰富的页面机制）。在使用同步工具拉取时排除了 `cufflinksmen` 专属的 `content/` 商品数据，实现无损替换。
+- **治理与运维（Ops）**：按脚手架最新要求引入 `scripts/` 与 `ops/`，并成功同步自动化工作流脚本与站点画像文档（包含 `IMAGE_PIPELINE.md`, `OPERATIONS_REPORT.md` 等全套 PSEO 风格运维文档）。
+- **图片依赖更新**：更新了 `site.config.yaml` 中配置的图片路径以及本地部署图片，使其完全遵循 `images:manifest` 与 `images:audit` 脚本的工作流规范（通过 WebP 化与名字自动对齐消除了审计错误）。
+- **文案审计修复**：修复了文案中存在的违规夸大描述（如产品描述中包含不受支持的 `tarnish-resistant` 宣发词汇），现在已完全通过 `npm run validate:copy` 的严格拦截器。
+- **结账优化**：同步并替换了 Cloudflare Functions 中用于处理 Stripe 支付的 API `checkout.js` 的实现。
+
+---
+
 ## 2026-04-05 — 修复 Cloudflare Pages 404 及 API 架构迁移
 
 ### 具体改动 1

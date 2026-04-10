@@ -2,6 +2,7 @@
 import config from '../lib/config';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import ExitIntentPopup from '../components/ExitIntentPopup.astro';
 import CartDrawer from '../components/CartDrawer.astro';
 import '../styles/global.css';
 
@@ -10,13 +11,15 @@ interface Props {
   description?: string;
   image?: string;
   jsonLd?: string;
+  noindex?: boolean;
 }
 
 const {
   title = config.brand.name,
   description = config.seo.default_description,
-  image = '/images/og-default.png',
+  image = '/images/og-default.webp',
   jsonLd,
+  noindex = false,
 } = Astro.props;
 
 const fullTitle = title === config.brand.name
@@ -35,11 +38,9 @@ const fullTitle = title === config.brand.name
   <meta property="og:image" content={image} />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
+  {noindex && <meta name="robots" content="noindex,follow" />}
   <title>{fullTitle}</title>
-  <link rel="icon" href="/favicon.ico" sizes="32x32" />
-  <link rel="icon" type="image/png" href="/favicon.png" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="canonical" href={`https://${config.brand.domain}${Astro.url.pathname}`} />
 
   {config.brand.gtm_id && (
@@ -50,10 +51,6 @@ const fullTitle = title === config.brand.name
       'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
       })(window,document,'script','dataLayer',id);
     </script>
-  )}
-
-  {config.brand.cf_web_analytics_token && (
-    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={`{"token": "${config.brand.cf_web_analytics_token}"}`}></script>
   )}
 
   {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
@@ -68,6 +65,7 @@ const fullTitle = title === config.brand.name
     <slot />
   </main>
   <Footer />
+  <ExitIntentPopup />
   <CartDrawer />
 </body>
 </html>

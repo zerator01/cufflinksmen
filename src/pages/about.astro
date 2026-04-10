@@ -4,13 +4,13 @@ import TestimonialSlider from '../components/TestimonialSlider.astro';
 import config from '../lib/config';
 ---
 
-<BaseLayout title="About Us" description="We're a team of sourcing specialists curating the best men's cufflinks from China's accessories manufacturing hub.">
+<BaseLayout title="About Us" description="We're a team of sourcing specialists curating the best bridal jewellery sets from China's manufacturing heartland.">
   <!-- Hero Banner -->
   <section class="page-hero-clean">
     <div class="container page-hero-clean__content">
       <p class="section__subtitle section__subtitle--hero">Our Story</p>
       <h1>{config.brand.name}</h1>
-      <p class="page-hero-clean__text">Curating solid, honest cufflinks for men — at prices that make sense.</p>
+      <p class="page-hero-clean__text">Curating stunning bridal jewellery that photographs beautifully — at prices that make sense.</p>
     </div>
   </section>
 
@@ -23,7 +23,7 @@ import config from '../lib/config';
           <p>{config.about.story}</p>
         </div>
         <div class="about-content__image">
-          <img src="/images/about-hero.png" alt="Inside our Guangzhou cufflink factory — precision stamping machines and quality inspection workbenches" loading="lazy" />
+          <img src="/images/about-hero.webp" alt="Brand curation and assortment planning" loading="lazy" />
         </div>
       </div>
     </div>
@@ -42,7 +42,7 @@ import config from '../lib/config';
           </ul>
         </div>
         <div class="about-content__image">
-          <img src="/images/about-why.png" alt="Steel calipers measuring the precise thickness of a polished silver cufflink" loading="lazy" />
+          <img src="/images/about-why.webp" alt="Product quality and review process" loading="lazy" />
         </div>
       </div>
     </div>
@@ -53,9 +53,9 @@ import config from '../lib/config';
     <div class="container">
       <div class="section__header">
         <p class="section__subtitle">What They Say</p>
-        <h2 class="section__title">Trusted by Grooms & Retailers</h2>
+        <h2 class="section__title">Trusted by Brides & Retailers</h2>
       </div>
-      <TestimonialSlider testimonials={config.testimonials} />
+      <TestimonialSlider testimonials={config.testimonials.slice(0, 3)} />
     </div>
   </section>
 </BaseLayout>

@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import config from '../../lib/config';
 
-const allProducts = await getCollection('products');
+const allProducts = (await getCollection('products')).filter((entry) => entry.data.status !== 'draft');
 const categories = config.categories || [];
 
 const mappedProducts = allProducts.map(entry => ({
@@ -16,12 +16,12 @@ const mappedProducts = allProducts.map(entry => ({
 }));
 ---
 
-<BaseLayout title="Shop All Collections" description="Browse our complete collection of premium factory-direct men's cufflinks — silver, gold, and novelty styles.">
+<BaseLayout title="Shop All Sets" description="Browse our curated collection of bridal jewellery sets — pearl, crystal, and gold-plated styles.">
   <section class="page-hero-clean">
     <div class="container page-hero-clean__content">
       <p class="section__subtitle section__subtitle--hero">Our Collection</p>
-      <h1>Shop All Collections</h1>
-      <p class="page-hero-clean__text">Premium men's cufflinks — silver, gold, and novelty collections</p>
+      <h1>Shop All Sets</h1>
+      <p class="page-hero-clean__text">Curated bridal jewellery — pearl, crystal, and gold-plated styles</p>
     </div>
   </section>
 
@@ -31,7 +31,7 @@ const mappedProducts = allProducts.map(entry => ({
         <div class="filter-bar__tabs">
           <button class="filter-tab active" data-cat="all">All</button>
           {categories.map((cat: any) => (
-            <button class="filter-tab" data-cat={cat.slug}>{cat.name}</button>
+            <button class="filter-tab" data-cat={cat.name}>{cat.name}</button>
           ))}
         </div>
         <div class="filter-bar__controls">

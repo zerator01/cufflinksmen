@@ -1,0 +1,128 @@
+{
+  "generated_at": "2026-04-10T13:04:03.099Z",
+  "site": "cufflinksmen",
+  "brand": "Cufflinks Men",
+  "slot_count": 15,
+  "slots": [
+    {
+      "slot_name": "hero_background",
+      "width": 2560,
+      "height": 1200,
+      "output": "public/images/hero-bg",
+      "public_path": "/images/hero-bg.webp",
+      "prompt": "Cufflinks Men homepage hero background for The Detail That Speaks First. Mood: event-night polish, photo-ready sparkle, accessible elegance. Context: Curated cufflinks for men — silver, gold, and novelty styles with mechanisms that actually hold. For weddings, work, and every formal moment in between. Starting at $8.. Ultra-wide landscape with negative space for homepage copy and layered sparkle details. Photorealistic editorial product photography, high-end ecommerce clarity, clean lighting. No text, no watermark, no brand marks."
+    },
+    {
+      "slot_name": "about_hero",
+      "width": 800,
+      "height": 500,
+      "output": "public/images/about-hero",
+      "public_path": "/images/about-hero.webp",
+      "prompt": "Cufflinks Men about page curation image. Mood: trustworthy, editorial, behind-the-scenes clarity for Cufflinks Men. Landscape storytelling image suitable for about page content block. Photorealistic editorial product photography, high-end ecommerce clarity, clean lighting. No text, no watermark, no brand marks."
+    },
+    {
+      "slot_name": "about_why",
+      "width": 800,
+      "height": 500,
+      "output": "public/images/about-why",
+      "public_path": "/images/about-why.webp",
+      "prompt": "Cufflinks Men quality and selection image. Mood: careful review, polished merchandising, honest trust signal. Landscape detail image for supporting why-us content. Photorealistic editorial product photography, high-end ecommerce clarity, clean lighting. No text, no watermark, no brand marks."
+    },
+    {
+      "slot_name": "contact_hero",
+      "width": 1200,
+      "height": 800,
+      "output": "public/images/contact-hero",
+      "public_path": "/images/contact-hero.png",
+      "prompt": "Cufflinks Men contact page support image. Mood: approachable support, premium but clear ecommerce service energy. Split-hero friendly landscape image with room for adjacent contact copy. Photorealistic editorial product photography, high-end ecommerce clarity, clean lighting. No text, no watermark, no brand marks."
+    },
+    {
+      "slot_name": "category_silver-cufflinks-men",
+      "width": 800,
+      "height": 460,
+      "output": "public/images/category-silver-cufflinks-men",
+      "public_path": "/images/category-silver-cufflinks-men.webp",
+      "prompt": "Cufflinks Men category image for Silver Cufflinks Men. Mood: niche-specific merchandising image. Context: The safe bet that never looks safe. Polished, brushed, or matte — silver cufflinks pair with everything from a navy interview suit to a charcoal wedding tux. Stainless steel and silver-plated finishes with bullet-back or whale-back mechanisms built to stay put all day.. Landscape crop suitable for category cards, product-led, visually clean, easy focal point. Photorealistic editorial product photography, high-end ecommerce clarity, clean lighting. No text, no watermark, no brand marks."
+    },
+    {
+      "slot_name": "category_gold-cufflinks-men",
+      "width": 800,
+      "height": 460,
+      "output": "public/images/category-gold-cufflinks-men",
+      "public_path": "/images/category-gold-cufflinks-men.webp",
+      "prompt": "Cufflinks Men category image for Gold Cufflinks Men. Mood: niche-specific merchandising image. Context: Warm, deliberate, unmistakable. Gold-tone cufflinks in yellow gold, rose gold, and champagne finishes for the groom who wants his details to match his band, or the professional who knows that warmth commands a room differently than silver does.. Landscape crop suitable for category cards, product-led, visually clean, easy focal point. Photorealistic editorial product photography, high-end ecommerce clarity, clean lighting. No text, no watermark, no brand marks."
+    },
+    {
+      "slot_name": "category_novelty-cufflinks-men",
+      "width": 800,
+      "height": 460,
+      "output": "public/images/category-novelty-cufflinks-men",
+      "public_path": "/images/category-novelty-cufflinks-men.webp",
+      "prompt": "Cufflinks Men category image for Novelty Cufflinks Men. Mood: niche-specific merchandising image. Context: The conversation starter hiding under your cuff. Superhero shields, musical notes, sports icons, beer mugs — novelty cufflinks let you say something about yourself without saying a word. The groomsmen gift that gets worn to every wedding after yours.. Landscape crop suitable for category cards, product-led, visually clean, easy focal point. Photorealistic editorial product photography, high-end ecommerce clarity, clean lighting. No text, no watermark, no brand marks."
+    },
+    {
+      "slot_name": "feature_effortless-matching",
+      "width": 800,
+      "height": 500,
+      "output": "public/images/feature-1",
+      "public_path": "/images/feature-1.webp",
+      "prompt": "Cufflinks Men feature image for Stop Overthinking It. Mood: conversion-supporting supporting image. Context: Silver or gold? Bullet-back or whale-back? Classic or quirky? You've got fifteen browser tabs open and they all look the same. We've already filtered the noise. Every cufflink here was hand-picked for one thing: does it look sharp, feel solid, and stay on all day? If the answer isn't yes to all three, it's not in our collection. Pick your metal. Pick your style. Done.. Editorial ecommerce supporting visual, medium crop, focused subject, clean background. Photorealistic editorial product photography, high-end ecommerce clarity, clean lighting. No text, no watermark, no brand marks."
+    },
+    {
+      "slot_name": "feature_honest-materials",
+      "width": 800,
+      "height": 500,
+      "output": "public/images/feature-2",
+      "public_path": "/images/feature-2.webp",
+      "prompt": "Cufflinks Men feature image for What You See Is What You Get. Mood: conversion-supporting supporting image. Context: We tell you exactly what each pair is made of — stainless steel, zinc alloy, gold-plated brass, or sterling silver. No 'premium metal blend' nonsense. The mechanism type is listed on every product page because a cufflink that pops open during a handshake defeats the entire purpose. We test the clasp before we list it.. Editorial ecommerce supporting visual, medium crop, focused subject, clean background. Photorealistic editorial product photography, high-end ecommerce clarity, clean lighting. No text, no watermark, no brand marks."
+    },
+    {
+      "slot_name": "feature_smart-spending",
+      "width": 800,
+      "height": 500,
+      "output": "public/images/feature-3",
+      "public_path": "/images/feature-3.webp",
+      "prompt": "Cufflinks Men feature image for Look Sharp Without the Markup. Mood: conversion-supporting supporting image. Context: Department stores charge $40 for a pair of cufflinks made from the same materials you'll find here for $12. We cut out the retail layers. Source direct. Ship direct. Your groomsmen won't know the difference — and your wallet definitely will. Most of our collection sits under $20.. Editorial ecommerce supporting visual, medium crop, focused subject, clean background. Photorealistic editorial product photography, high-end ecommerce clarity, clean lighting. No text, no watermark, no brand marks."
+    },
+    {
+      "slot_name": "og_default",
+      "width": 1200,
+      "height": 630,
+      "output": "public/images/og-default",
+      "public_path": "/images/og-default.webp",
+      "prompt": "Cufflinks Men open graph image. Mood: strong first-impression social preview for Cufflinks Men. Wide social card composition with strong center balance and readable negative space. Photorealistic editorial product photography, high-end ecommerce clarity, clean lighting. No text, no watermark, no brand marks."
+    },
+    {
+      "slot_name": "avatar_marcus-j",
+      "width": 640,
+      "height": 640,
+      "output": "public/images/avatar-1",
+      "public_path": "/images/avatar-1.webp",
+      "prompt": "Cufflinks Men testimonial support portrait for Groom, Atlanta. Mood: believable, polished, warm, non-stock-photo energy. Context: I bought matching silver pairs for my five groomsmen and one for myself. Every single guy wore them — which never happens with groomsmen gifts. The bullet-back mechanism held solid through the ceremony, the reception, and the afterparty.. Square portrait crop, clean background, subtle depth of field. Photorealistic editorial product photography, high-end ecommerce clarity, clean lighting. No text, no watermark, no brand marks, no uncanny symmetry."
+    },
+    {
+      "slot_name": "avatar_daniel-t",
+      "width": 640,
+      "height": 640,
+      "output": "public/images/avatar-2",
+      "public_path": "/images/avatar-2.webp",
+      "prompt": "Cufflinks Men testimonial support portrait for Corporate Professional, Singapore. Mood: believable, polished, warm, non-stock-photo energy. Context: I was skeptical about ordering cufflinks online for under $15, honestly. But the weight and the finish on these are genuinely better than a pair I bought from a department store for four times the price. I've been wearing the brushed silver set to meetings for three months — still looks sharp.. Square portrait crop, clean background, subtle depth of field. Photorealistic editorial product photography, high-end ecommerce clarity, clean lighting. No text, no watermark, no brand marks, no uncanny symmetry."
+    },
+    {
+      "slot_name": "avatar_ryan-s",
+      "width": 640,
+      "height": 640,
+      "output": "public/images/avatar-3",
+      "public_path": "/images/avatar-3.webp",
+      "prompt": "Cufflinks Men testimonial support portrait for Best Man, London. Mood: believable, polished, warm, non-stock-photo energy. Context: Got my brother a pair of the novelty music note cufflinks for his wedding — he's a jazz guitarist. He texted me a photo from his honeymoon wearing them with a linen shirt. That's when you know you nailed the gift.. Square portrait crop, clean background, subtle depth of field. Photorealistic editorial product photography, high-end ecommerce clarity, clean lighting. No text, no watermark, no brand marks, no uncanny symmetry."
+    },
+    {
+      "slot_name": "popup_guide",
+      "width": 800,
+      "height": 800,
+      "output": "public/images/popup-guide",
+      "public_path": "/images/popup-guide.webp",
+      "prompt": "Cufflinks Men popup guide image. Mood: helpful and low-pressure lead magnet support. Context: Your popup description here.. Square ecommerce promo visual with a single clear focal point. Photorealistic editorial product photography, high-end ecommerce clarity, clean lighting. No text, no watermark, no brand marks."
+    }
+  ]
+}

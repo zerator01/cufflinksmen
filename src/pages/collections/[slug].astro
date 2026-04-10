@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 }
 
 const { cat } = Astro.props;
-const allProducts = await getCollection('products');
+const allProducts = (await getCollection('products')).filter((entry) => entry.data.status !== 'draft');
 
 // Filter products based on category name matching
 const categoryProducts = allProducts
@@ -128,9 +128,9 @@ const defaultImage = cat.image || config.seo.default_image;
       <p class="section__subtitle">Styling Notes</p>
       <h2 class="moodboard-title">How to Embody {cat.name}</h2>
       <p class="moodboard-text">
-        {cat.slug === 'silver-cufflinks-men' && "Silver speaks in understatement. Best paired with dark navy, charcoal, or classic black suiting. It reflects cool, precision machinery and works impeccably in boardroom lighting. For a modern, stark appearance, pair with a crisp white french-cuff shirt."}
-        {cat.slug === 'gold-cufflinks-men' && "Gold brings unapologetic warmth and confidence. Pair these with dark brown, olive, or warm grey suiting. The metallic sheen catches warm evening light perfectly, establishing authority. Let the metal be the focal point of the outfit."}
-        {cat.slug === 'novelty-cufflinks-men' && "Novelty is for the man who controls his own narrative. Pair these with casual blazers, sports coats, or wear them unexpectedly with formal tuxedos as a conversation starter. The defining accessory that proves you don't take yourself too seriously."}
+        {cat.slug === 'pearl-bridal-jewellery-sets' && "Pearls symbolize timeless purity. Best paired with sweetheart necklines, silk slip dresses, and soft elegant updos. They reflect natural warmth, making your skin glow effortlessly in daylight photography. For a modern twist, mix with subtle gold accents."}
+        {cat.slug === 'crystal-bridal-jewellery-sets' && "Crystals are for the bride who wants to be unforgettable. Pair these with deep V-necks or sweetheart gowns. The facets catch maximum light, ensuring you sparkle brilliantly during your evening reception and under the flash. Keep other accessories minimal."}
+        {cat.slug === 'gold-plated-bridal-jewellery-sets' && "Gold brings a vintage, regal warmth. Especially stunning against warm skin tones and champagne or ivory gowns. Wear with off-the-shoulder silhouettes or long lace sleeves for a classic, luxurious aesthetic. Let the metal be the focal point."}
       </p>
     </div>
   </section>
@@ -141,7 +141,7 @@ const defaultImage = cat.image || config.seo.default_image;
       <div class="container">
         <div class="editorial-seo-grid">
           <div class="editorial-seo__image-wrap">
-            <img src={cat.image || config.seo.default_image} alt={`About ${cat.name}`} class="editorial-seo__image" loading="lazy" />
+            <img src={cat.editorial_image || cat.image || config.seo.default_image} alt={`About ${cat.name}`} class="editorial-seo__image" loading="lazy" />
           </div>
           <div class="editorial-seo__content">
             <h2 class="editorial-seo__title">About the <br/>{cat.name} Collection</h2>

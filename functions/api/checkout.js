@@ -1,12 +1,37 @@
-// @ts-nocheck
-import Stripe from 'stripe';
+// Cloudflare Pages Function — Stripe Checkout
+// Runs as a Worker automatically when deployed to CF Pages
+// Route: POST /api/checkout
 
-export async function onRequestPost({ request, env }) {
-  const STRIPE_SECRET_KEY = env.STRIPE_SECRET_KEY;
-  
+import Stripe from 'stripe';
+import { productCatalog } from '../_shared/productCatalog.js';
+
+function resolveProductId(item) {
+  if (item?.productId && productCatalog[item.productId]) {
+    return item.productId;
+  }
+
+  if (typeof item?.id !== 'string' || item.id.length === 0) {
+    return null;
+  }
+
+  if (productCatalog[item.id]) {
+    return item.id;
+  }
+
+  const catalogIds = Object.keys(productCatalog).sort((a, b) => b.length - a.length);
+  return catalogIds.find((catalogId) => (
+    item.id === catalogId ||
+    item.id.startsWith(`${catalogId}::`) ||
+    item.id.startsWith(`${catalogId}-`)
+  )) || null;
+}
+
+export async function onRequestPost(context) {
+  const STRIPE_SECRET_KEY = context.env.STRIPE_SECRET_KEY;
+
   if (!STRIPE_SECRET_KEY) {
     return new Response(
-      JSON.stringify({ error: 'Stripe not configured. Please set STRIPE_SECRET_KEY.' }),
+      JSON.stringify({ error: 'Stripe not configured.' }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }
@@ -14,7 +39,7 @@ export async function onRequestPost({ request, env }) {
   const stripe = new Stripe(STRIPE_SECRET_KEY);
 
   try {
-    const { items } = await request.json();
+    const { items } = await context.request.json();
 
     if (!items || items.length === 0) {
       return new Response(
@@ -23,21 +48,40 @@ export async function onRequestPost({ request, env }) {
       );
     }
 
-    const line_items = items.map(
-      (item) => ({
-        price_data: {
-          currency: 'usd',
-          product_data: {
-            name: item.name,
-            ...(item.image ? { images: [item.image] } : {}),
-          },
-          unit_amount: Math.round(item.price * 100),
-        },
-        quantity: item.qty,
-      })
-    );
+    const normalizedItems = items.map((item) => {
+      const productId = resolveProductId(item);
+      const quantity = Number.parseInt(String(item?.qty ?? ''), 10);
 
-    const subtotal = items.reduce((sum, item) => sum + item.price * item.qty, 0);
+      if (!productId) {
+        throw new Error('One or more cart items are invalid.');
+      }
+
+      if (!Number.isInteger(quantity) || quantity < 1 || quantity > 10) {
+        throw new Error('One or more cart quantities are invalid.');
+      }
+
+      return {
+        productId,
+        quantity,
+        catalogEntry: productCatalog[productId],
+      };
+    });
+
+    const line_items = normalizedItems.map(({ quantity, catalogEntry }) => ({
+      price_data: {
+        currency: 'usd',
+        product_data: {
+          name: catalogEntry.name,
+          ...(catalogEntry.image ? { images: [catalogEntry.image] } : {}),
+        },
+        unit_amount: Math.round(catalogEntry.price * 100),
+      },
+      quantity,
+    }));
+
+    const subtotal = normalizedItems.reduce((sum, item) => (
+      sum + item.catalogEntry.price * item.quantity
+    ), 0);
     const FREE_SHIPPING_THRESHOLD = 50;
 
     const shipping_options = [];
@@ -76,7 +120,7 @@ export async function onRequestPost({ request, env }) {
       );
     }
 
-    const origin = new URL(request.url).origin;
+    const origin = new URL(context.request.url).origin;
 
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',

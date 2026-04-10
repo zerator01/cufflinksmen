@@ -1,0 +1,50 @@
+{
+  "generated_at": "2026-04-10T06:26:15.008Z",
+  "site": "2C_Boutique_Scaffold_V2",
+  "review_exists": true,
+  "decisions": [
+    {
+      "task_id": "review_top_pages",
+      "title": "Review one strong landing page and one weak landing page.",
+      "owner": "site owner",
+      "executor_type": "human",
+      "executor": "site owner",
+      "status": "planned",
+      "decision": "carry_forward",
+      "carry_forward_reason": ""
+    },
+    {
+      "task_id": "audit_pdp_trust",
+      "title": "Audit the current PDP trust stack and note the weakest gap.",
+      "owner": "site owner",
+      "executor_type": "agent",
+      "executor": "codex",
+      "status": "planned",
+      "decision": "carry_forward",
+      "carry_forward_reason": ""
+    },
+    {
+      "task_id": "refresh_one_page",
+      "title": "Refresh one existing page instead of only publishing net-new pages.",
+      "owner": "site owner",
+      "executor_type": "human",
+      "executor": "site owner",
+      "status": "planned",
+      "decision": "carry_forward",
+      "carry_forward_reason": ""
+    },
+    {
+      "task_id": "update_scorecard",
+      "title": "Update KPI scorecard before the next weekly cycle.",
+      "owner": "site owner",
+      "executor_type": "human",
+      "executor": "site owner",
+      "status": "planned",
+      "decision": "carry_forward",
+      "carry_forward_reason": ""
+    }
+  ],
+  "decision_counts": {
+    "carry_forward": 4
+  }
+}

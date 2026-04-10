@@ -3,7 +3,7 @@ name: "Silver & Onyx Tuxedo Stud and Cuff Links Set"
 seo_title: "Silver & Onyx Tuxedo Stud Cuff Links Set | Classic Formal Accessories"
 price: 19.0
 originalPrice: 28.0
-description: "A complete formal ensemble in hand: six round onyx studs and two matching cuff links, each set in tarnish-resistant brass with a silver-tone finish. The deep black faceted onyx catches light against the cool silver casing, giving your tuxedo the kind of sharp detail that reads from across the ballroom. Ready to wear straight out of the box — no polishing required."
+description: "A complete formal ensemble in hand: six round onyx studs and two matching cuff links, each set in polished brass with a silver-tone finish. The deep black faceted onyx catches light against the cool silver casing, giving your tuxedo the kind of sharp detail that reads from across the ballroom. Ready to wear straight out of the box — no polishing required."
 image: "https://assets.cufflinksmen.com/products/silver-onyx-tuxedo-stud-cufflinks-set/banner-4.webp"
 gallery:
   - "https://assets.cufflinksmen.com/products/silver-onyx-tuxedo-stud-cufflinks-set/banner-5.webp"
@@ -12,7 +12,7 @@ status: "published"
 features:
   - "Set of 6 onyx studs and 2 cuff links in matching silver-tone brass casings"
   - "Faceted round onyx inlays provide natural light-refracting contrast against silver finish"
-  - "Tarnish-resistant lacquered brass maintains shine through multiple wears"
+  - "Lacquered brass maintains shine through multiple wears"
   - "Standard 12mm (0.47 in) stud face; cuff link bars at 18mm (0.71 in)"
   - "Secure double-pin clutch backs keep studs in place through a full evening of movement"
   - "Classic round silhouette pairs with any formal shirt pleat or French cuff style"
@@ -37,7 +37,7 @@ use_case: "For the man who keeps a black-tie wardrobe ready: this set lives in a
 ---
 ## The Dress Shirt Is Pressed. The Jacket Is Ready. Now You Need the Details.
 
-You open the wardrobe and your tuxedo is hanging there, perfect — but the studs are scattered in a jewellery box, the cuff links don't match, and you're already running late. This six-stud and two-cuff-link set changes that equation. Each piece is precision-set in tarnish-resistant brass with a cool silver finish, anchored by a deep-black faceted onyx that reads crisp against a white formal shirt. The 12mm round face sits flush with your shirt placket. The spring-loaded clutch back holds through dancing, handshaking, and a full three-course dinner without rotating or slipping. When you step into the ballroom, every element of your look is already resolved — and it shows.
+You open the wardrobe and your tuxedo is hanging there, perfect — but the studs are scattered in a jewellery box, the cuff links don't match, and you're already running late. This six-stud and two-cuff-link set changes that equation. Each piece is precision-set in polished brass with a cool silver finish, anchored by a deep-black faceted onyx that reads crisp against a white formal shirt. The 12mm round face sits flush with your shirt placket. The spring-loaded clutch back holds through dancing, handshaking, and a full three-course dinner without rotating or slipping. When you step into the ballroom, every element of your look is already resolved — and it shows.
 
 ### Onyx and Silver: The Contrast That Defines Formal Dress
 

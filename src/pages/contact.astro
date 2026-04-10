@@ -3,17 +3,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import config from '../lib/config';
 ---
 
-<BaseLayout title="Contact Us" description="Get in touch with the Cufflinks Men team. We're here to help with orders, shipping, and product inquiries.">
+<BaseLayout title="Contact Us" description="Get in touch with the Bridal Jewellery Set team. We're here to help with orders, shipping, and product inquiries.">
   
   <section class="page-hero-split">
     <div class="page-hero-split__image">
-      <img src="/images/contact-hero.png" alt="Polished silver cufflink and matte black business card on dark slate" />
+      <img src="/images/contact-hero.png" alt="Customer support and contact" />
     </div>
     <div class="page-hero-split__content">
       <div class="page-hero-split__text-lockup">
         <p class="section__subtitle section__subtitle--hero">We're Here for You</p>
         <h1>Get in Touch</h1>
-        <p class="page-hero-split__text">Whether you have a question about an existing order, need help choosing the right style, or want to discuss a wholesale partnership, our team is ready to assist.</p>
+        <p class="page-hero-split__text">Whether you have a question about an existing order, need styling advice, or want to discuss a custom piece, our dedicated team is ready to assist.</p>
       </div>
     </div>
   </section>
@@ -30,7 +30,7 @@ import config from '../lib/config';
           <div class="contact-card">
             <h3>Customer Support</h3>
             <p>For questions about orders, returns, and shipping.</p>
-            <a href={`mailto:${config.brand.support_email}`} class="contact-link">{config.brand.support_email}</a>
+            <a href={`mailto:${config.contact.email}`} class="contact-link">{config.contact.email}</a>
           </div>
 
           <div class="contact-card">
@@ -41,14 +41,14 @@ import config from '../lib/config';
 
           <div class="contact-card">
             <h3>Headquarters</h3>
-            <p>Our operations and sourcing team are based in China's accessories manufacturing hub.</p>
-            <p class="contact-address">{config.brand.company_address}</p>
+            <p>Our operations and curation team are based in China's jewellery hub.</p>
+            <p class="contact-address">{config.contact.address}</p>
           </div>
         </div>
 
         <!-- Contact Form Side -->
         <div class="contact-form-wrapper">
-          <form class="contact-form" action="#" method="POST" onsubmit="event.preventDefault(); alert('Message sent successfully! We will get back to you soon.');">
+          <form class="contact-form" id="contact-form">
             <div class="form-row">
               <div class="form-group">
                 <label for="c-name">Name *</label>
@@ -178,7 +178,7 @@ import config from '../lib/config';
     margin-bottom: 0;
   }
   .contact-card h3 {
-    font-family: var(--font-sans);
+    font-family: var(--font-body);
     font-size: var(--font-size-md);
     font-weight: 600;
     margin-bottom: var(--space-xs);
@@ -242,7 +242,7 @@ import config from '../lib/config';
   }
 
   .form-group label {
-    font-family: var(--font-sans);
+    font-family: var(--font-body);
     font-size: var(--font-size-sm);
     color: var(--color-text);
     font-weight: 500;
@@ -251,7 +251,7 @@ import config from '../lib/config';
   .form-group input,
   .form-group select,
   .form-group textarea {
-    font-family: var(--font-sans);
+    font-family: var(--font-body);
     font-size: var(--font-size-base);
     padding: var(--space-sm) var(--space-md);
     border: 1px solid var(--color-border);
@@ -279,3 +279,27 @@ import config from '../lib/config';
     margin-top: var(--space-sm);
   }
 </style>
+
+<script define:vars={{ contactEmail: config.contact.email }}>
+  const contactForm = document.getElementById('contact-form') as HTMLFormElement | null;
+
+  contactForm?.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(contactForm);
+    const name = String(formData.get('name') || '').trim();
+    const email = String(formData.get('email') || '').trim();
+    const subject = String(formData.get('subject') || 'general').trim();
+    const message = String(formData.get('message') || '').trim();
+
+    const subjectLine = `[Bridal Jewellery Set] ${subject} inquiry from ${name || 'website visitor'}`;
+    const body = [
+      `Name: ${name}`,
+      `Email: ${email}`,
+      '',
+      message,
+    ].join('\n');
+
+    window.location.href = `mailto:${contactEmail}?subject=${encodeURIComponent(subjectLine)}&body=${encodeURIComponent(body)}`;
+  });
+</script>

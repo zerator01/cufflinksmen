@@ -8,6 +8,48 @@ import TestimonialSlider from '../components/TestimonialSlider.astro';
 import FaqAccordion from '../components/FaqAccordion.astro';
 import FinalCTA from '../components/FinalCTA.astro';
 import config from '../lib/config';
+import { getCollection } from 'astro:content';
+import { deriveProductSignals } from '../lib/productSignals';
+
+const allProducts = (await getCollection('products')).filter((entry) => entry.data.status !== 'draft');
+const featuredProducts = allProducts.map(entry => ({
+  id: entry.id,
+  name: entry.data.name,
+  price: entry.data.price,
+  image: entry.data.image,
+  link: `/products/${entry.id}`,
+  category: entry.data.category,
+})).slice(0, 6);
+
+const productCards = allProducts.map((entry) => ({
+  id: entry.id,
+  name: entry.data.name,
+  price: entry.data.price,
+  image: entry.data.image,
+  link: `/products/${entry.id}`,
+  signals: deriveProductSignals({ id: entry.id, data: entry.data }),
+}));
+
+const curatedPicks = [
+  {
+    label: 'Under $25',
+    title: 'Entry-Priced Favorite',
+    description: 'A strong first pick if you want a polished bridal look without overspending.',
+    product: [...productCards].sort((a, b) => a.price - b.price)[0],
+  },
+  {
+    label: 'Statement Look',
+    title: 'Boldest Spotlight Piece',
+    description: 'For receptions, cultural styling, and shoppers who want the jewelry to read from a distance.',
+    product: productCards.find((product) => product.signals.styles.includes('statement')) || productCards[0],
+  },
+  {
+    label: 'Bridal Party',
+    title: 'Easy Group Pick',
+    description: 'A more flexible choice for bridesmaids, gifting, and multi-event wear.',
+    product: productCards.find((product) => product.signals.occasions.includes('bridal-party')) || productCards[1] || productCards[0],
+  },
+];
 
 // Generate FAQPage + Organization JSON-LD
 const faqSchema = {
@@ -28,6 +70,7 @@ const orgSchema = {
   "@type": "Organization",
   "name": config.brand.name,
   "url": `https://${config.brand.domain}`,
+  "logo": `https://${config.brand.domain}/logo.svg`,
   "description": config.seo.default_description,
   "contactPoint": {
     "@type": "ContactPoint",
@@ -67,8 +110,66 @@ const jsonLd = JSON.stringify([faqSchema, orgSchema]);
     </div>
   </section>
 
-  <!-- 板块 4: Feature Blocks -->
+  <!-- 板块 3.5: Featured Products -->
   <section class="section section--alt">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__subtitle">Handpicked For You</p>
+        <h2 class="section__title">Featured Bridal Sets</h2>
+        <p class="section__description">Explore our most loved and photograph-ready curations.</p>
+      </div>
+      <div class="product-grid grid grid--3">
+        {featuredProducts.map((product: any) => (
+          <div class="product-card card" data-price={product.price} data-name={product.name}>
+            <div class="product-card__image-wrap">
+              <a href={product.link}>
+                <img src={product.image} alt={product.name} class="card__image" loading="lazy" />
+              </a>
+            </div>
+            <div class="card__body" style="text-align:center;">
+              <h3 class="card__title" style="font-size: 1.1rem; font-weight: 500; margin-bottom: 0.25rem; color: var(--color-primary);">{product.name}</h3>
+              <p class="product-card__price" style="font-size: 1.25rem; font-weight: 700; color: var(--color-accent); margin-bottom: 1rem;">${product.price.toFixed(2)}</p>
+              <a href={product.link} class="btn btn--primary" style="width: 100%;">
+                View Set
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div style="text-align: center; margin-top: 3rem;">
+        <a href="/products" class="btn btn--outline">Shop All Sets</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__subtitle">Curated Picks</p>
+        <h2 class="section__title">Three Fast Ways To Start</h2>
+        <p class="section__description">If you want a quicker route than browsing the full catalog, start with one of these editor-selected picks.</p>
+      </div>
+      <div class="curated-picks">
+        {curatedPicks.map((item: any) => (
+          <article class="curated-pick card">
+            <p class="curated-pick__label">{item.label}</p>
+            <h3 class="curated-pick__title">{item.title}</h3>
+            <p class="curated-pick__text">{item.description}</p>
+            <a href={item.product.link} class="curated-pick__product">
+              <img src={item.product.image} alt={item.product.name} class="curated-pick__image" loading="lazy" />
+              <div class="curated-pick__meta">
+                <span class="curated-pick__name">{item.product.name}</span>
+                <span class="curated-pick__price">${item.product.price.toFixed(2)}</span>
+              </div>
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 板块 4: Feature Blocks -->
+  <section class="section">
     <div class="container">
       <div class="section__header">
         <p class="section__subtitle">Why Choose Us</p>
@@ -97,7 +198,7 @@ const jsonLd = JSON.stringify([faqSchema, orgSchema]);
         <p class="section__subtitle">Real Stories</p>
         <h2 class="section__title">What Our Customers Say</h2>
       </div>
-      <TestimonialSlider testimonials={config.testimonials} />
+      <TestimonialSlider testimonials={config.testimonials.slice(0, 3)} />
     </div>
   </section>
 
@@ -127,20 +228,18 @@ const jsonLd = JSON.stringify([faqSchema, orgSchema]);
   .bento-item {
     position: relative;
     border-radius: var(--border-radius-lg);
-    border: 1px solid var(--color-border);
     overflow: hidden;
     text-decoration: none;
     color: var(--color-white);
     display: flex;
     align-items: flex-end;
     padding: var(--space-xl);
-    transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
   }
 
   .bento-item:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-    border-color: var(--color-text-light);
+    box-shadow: var(--shadow-lg);
   }
 
   .bento-item img {
@@ -160,7 +259,7 @@ const jsonLd = JSON.stringify([faqSchema, orgSchema]);
   .bento-item__overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(28,28,30,0.85) 0%, rgba(28,28,30,0.4) 50%, rgba(28,28,30,0.1) 100%);
+    background: linear-gradient(to top, rgba(10,10,10,0.8) 0%, rgba(10,10,10,0.2) 50%, transparent 100%);
     z-index: 2;
   }
 
@@ -174,7 +273,6 @@ const jsonLd = JSON.stringify([faqSchema, orgSchema]);
     color: var(--color-white);
     margin-bottom: var(--space-xs);
     font-size: var(--font-size-3xl);
-    font-weight: 500;
   }
 
   .bento-item__content p {
@@ -208,6 +306,94 @@ const jsonLd = JSON.stringify([faqSchema, orgSchema]);
     }
     .bento-item__content h3 {
       font-size: var(--font-size-2xl);
+    }
+  }
+
+  .product-card__image-wrap {
+    background-color: var(--color-bg-alt);
+    overflow: hidden;
+    position: relative;
+    border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+  }
+
+  .product-card .card__image {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+  }
+
+  .product-card:hover .card__image {
+    transform: scale(1.05);
+  }
+
+  .curated-picks {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+    margin-top: var(--space-xl);
+  }
+
+  .curated-pick {
+    padding: var(--space-xl);
+  }
+
+  .curated-pick__label {
+    margin: 0 0 var(--space-sm);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    font-weight: 700;
+  }
+
+  .curated-pick__title {
+    margin-bottom: var(--space-sm);
+  }
+
+  .curated-pick__text {
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: var(--space-lg);
+  }
+
+  .curated-pick__product {
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    gap: var(--space-md);
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .curated-pick__image {
+    width: 88px;
+    height: 88px;
+    object-fit: cover;
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--color-border);
+  }
+
+  .curated-pick__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .curated-pick__name {
+    color: var(--color-primary);
+    line-height: 1.4;
+    font-weight: 600;
+  }
+
+  .curated-pick__price {
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+
+  @media (max-width: 768px) {
+    .curated-picks {
+      grid-template-columns: 1fr;
     }
   }
 </style>

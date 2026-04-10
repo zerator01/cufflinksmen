@@ -1,0 +1,33 @@
+{
+  "generated_at": "2026-04-10T06:26:15.113Z",
+  "site": "2C_Boutique_Scaffold_V2",
+  "samples": [
+    {
+      "route": "/",
+      "reason": "Homepage trust and merchandising baseline"
+    },
+    {
+      "route": "/products/",
+      "reason": "Collection and product discovery baseline"
+    },
+    {
+      "route": "/contact/",
+      "reason": "Support path validity and honesty check"
+    },
+    {
+      "route": "/help/",
+      "reason": "Trust and policy guidance check"
+    },
+    {
+      "route": "/products/_example_product/",
+      "reason": "Lowest-priced live PDP sample"
+    },
+    {
+      "route": "/collections/",
+      "reason": "Review category logic including Category One"
+    }
+  ],
+  "product_count": 1,
+  "category_count": 1,
+  "config_present": true
+}

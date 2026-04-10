@@ -3,9 +3,10 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FaqAccordion from '../../components/FaqAccordion.astro';
 import config from '../../lib/config';
+import { pickRelatedProducts } from '../../lib/productSignals';
 
 export async function getStaticPaths() {
-  const products = await getCollection('products');
+  const products = (await getCollection('products')).filter((entry) => entry.data.status !== 'draft');
   return products.map(entry => ({
     params: { slug: entry.id },
     props: { product: entry },
@@ -15,6 +16,14 @@ export async function getStaticPaths() {
 const { product } = Astro.props;
 const data = product.data;
 const { Content } = await render(product);
+const allProducts = (await getCollection('products')).filter((entry) => entry.data.status !== 'draft');
+const relatedProducts = pickRelatedProducts(product.id, allProducts, 3).map((entry) => ({
+  id: entry.id,
+  name: entry.data.name,
+  price: entry.data.price,
+  image: entry.data.image,
+  link: `/products/${entry.id}`,
+}));
 
 // Product JSON-LD Schema
 const productSchema = {
@@ -23,12 +32,16 @@ const productSchema = {
   "name": data.name,
   "description": data.description,
   "image": data.image,
+  "brand": {
+    "@type": "Brand",
+    "name": config.brand.name
+  },
   "offers": {
     "@type": "Offer",
     "price": data.price,
     "priceCurrency": "USD",
     "availability": "https://schema.org/InStock",
-    "url": `https://${config.brand.domain}/products/${product.id}`
+    "url": `https://bridaljewelleryset.com/products/${product.id}`
   }
 };
 
@@ -100,7 +113,7 @@ const pageTitle = data.seo_title || data.name;
         )}
 
         <div class="pdp__actions">
-          <button class="pdp__btn-dark js-add-to-cart" id="pdp-add-to-cart" data-id={`${product.id}-${data.variants?.[0]?.value || 'default'}`} data-name={`${data.name}${data.variants?.[0] ? ' - ' + data.variants[0].label : ''}`} data-price={data.variants?.[0]?.price || data.price} data-image={data.variants?.[0]?.image || data.image}>
+          <button class="pdp__btn-dark js-add-to-cart" id="pdp-add-to-cart" data-id={`${product.id}::${data.variants?.[0]?.value || 'default'}`} data-product-id={product.id} data-variant-value={data.variants?.[0]?.value || 'default'} data-name={`${data.name}${data.variants?.[0] ? ' - ' + data.variants[0].label : ''}`} data-price={data.variants?.[0]?.price || data.price} data-image={data.variants?.[0]?.image || data.image}>
             Add to Tote - ${(data.variants?.[0]?.price || data.price).toFixed(2)}
           </button>
 
@@ -168,6 +181,23 @@ const pageTitle = data.seo_title || data.name;
           <FaqAccordion items={data.faq} id="pdp-product-faq-rich" />
         </div>
       )}
+
+      {relatedProducts.length > 0 && (
+        <div class="pdp__related-section">
+          <h3>You May Also Like</h3>
+          <div class="pdp__related-grid">
+            {relatedProducts.map((item) => (
+              <a href={item.link} class="pdp__related-card">
+                <img src={item.image} alt={item.name} class="pdp__related-image" loading="lazy" />
+                <div class="pdp__related-body">
+                  <span class="pdp__related-name">{item.name}</span>
+                  <span class="pdp__related-price">${item.price.toFixed(2)}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   </section>
 
@@ -178,7 +208,7 @@ const pageTitle = data.seo_title || data.name;
         <span class="pdp__sticky-title">{data.name}</span>
         <span class="pdp__sticky-price">${data.price.toFixed(2)}</span>
       </div>
-      <button class="pdp__btn-dark js-add-to-cart" id="pdp-sticky-add" style="padding: 12px 24px; font-size: 0.85rem;" data-id={`${product.id}-${data.variants?.[0]?.value || 'default'}`} data-name={`${data.name}${data.variants?.[0] ? ' - ' + data.variants[0].label : ''}`} data-price={data.variants?.[0]?.price || data.price} data-image={data.variants?.[0]?.image || data.image}>Add to Tote</button>
+      <button class="pdp__btn-dark js-add-to-cart" id="pdp-sticky-add" style="padding: 12px 24px; font-size: 0.85rem;" data-id={`${product.id}::${data.variants?.[0]?.value || 'default'}`} data-product-id={product.id} data-variant-value={data.variants?.[0]?.value || 'default'} data-name={`${data.name}${data.variants?.[0] ? ' - ' + data.variants[0].label : ''}`} data-price={data.variants?.[0]?.price || data.price} data-image={data.variants?.[0]?.image || data.image}>Add to Tote</button>
     </div>
   </div>
 </BaseLayout>
@@ -515,6 +545,9 @@ const pageTitle = data.seo_title || data.name;
     .pdp__rich-content {
       padding-bottom: 6rem;
     }
+    .pdp__related-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   /* Rich Specs & Use Case Styling */
@@ -545,14 +578,16 @@ const pageTitle = data.seo_title || data.name;
   }
 
   .pdp__specs-section,
-  .pdp__faq-section {
+  .pdp__faq-section,
+  .pdp__related-section {
     margin-top: var(--space-3xl);
     padding-top: var(--space-xl);
     border-top: 1px solid var(--color-border);
   }
 
   .pdp__specs-section h3,
-  .pdp__faq-section h3 {
+  .pdp__faq-section h3,
+  .pdp__related-section h3 {
     font-family: var(--font-sans);
     font-size: 0.8rem;
     text-transform: uppercase;
@@ -590,6 +625,52 @@ const pageTitle = data.seo_title || data.name;
     font-size: 0.85rem;
     flex: 2;
     text-align: right;
+  }
+
+  .pdp__related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+  }
+
+  .pdp__related-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .pdp__related-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .pdp__related-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+
+  .pdp__related-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: var(--space-md);
+  }
+
+  .pdp__related-name {
+    color: var(--color-primary);
+    line-height: 1.45;
+    font-weight: 500;
+  }
+
+  .pdp__related-price {
+    color: var(--color-accent);
+    font-weight: 700;
   }
 
   /* Editorial Markdown Separation — :global needed to pierce into <Content /> */
@@ -673,7 +754,7 @@ const pageTitle = data.seo_title || data.name;
     const stickyBtn = document.getElementById('pdp-sticky-add') as HTMLButtonElement;
     const stickyPriceEl = document.querySelector('.pdp__sticky-price');
     const productBaseName = addBtn?.getAttribute('data-name')?.split(' - ')[0] || '';
-    const productBaseId = addBtn?.getAttribute('data-id')?.split('-').slice(0,-2).join('-') || '';
+    const productBaseId = addBtn?.getAttribute('data-product-id') || '';
 
     variantBtns.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -700,11 +781,13 @@ const pageTitle = data.seo_title || data.name;
         }
 
         // Update add-to-cart buttons
-        const newId = `${productBaseId}-${newValue}`;
+        const newId = `${productBaseId}::${newValue}`;
         const newName = `${productBaseName} - ${newLabel}`;
         [addBtn, stickyBtn].forEach(b => {
           if (!b) return;
           b.setAttribute('data-id', newId);
+          b.setAttribute('data-product-id', productBaseId);
+          b.setAttribute('data-variant-value', newValue);
           b.setAttribute('data-name', newName);
           b.setAttribute('data-price', newPrice.toString());
           if (newImage) b.setAttribute('data-image', newImage);

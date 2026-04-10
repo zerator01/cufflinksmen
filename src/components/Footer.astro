@@ -6,7 +6,7 @@ import config from '../lib/config';
   <div class="container">
     <div class="footer__grid">
       <div class="footer__brand">
-        <img src="/logo.svg" alt={config.brand.name} height="40" class="footer__logo-img" style="filter: invert(1) brightness(2);" />
+        <h4 class="footer__logo">{config.brand.name}</h4>
         <p class="footer__tagline">{config.brand.tagline}</p>
         <p class="footer__email">
           <a href={`mailto:${config.brand.email}`}>{config.brand.email}</a>

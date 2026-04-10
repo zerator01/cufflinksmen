@@ -1,0 +1,46 @@
+{
+  "generated_at": "2026-04-10T06:26:14.787Z",
+  "site": "2C_Boutique_Scaffold_V2",
+  "tasks": [
+    {
+      "id": "review_top_pages",
+      "status": "planned",
+      "owner": "site owner",
+      "executor_type": "human",
+      "executor": "site owner",
+      "due": "YYYY-MM-DD",
+      "carry_forward_reason": "",
+      "notes": "Review one strong landing page and one weak landing page."
+    },
+    {
+      "id": "audit_pdp_trust",
+      "status": "planned",
+      "owner": "site owner",
+      "executor_type": "agent",
+      "executor": "codex",
+      "due": "YYYY-MM-DD",
+      "carry_forward_reason": "",
+      "notes": "Audit the current PDP trust stack and note the weakest gap."
+    },
+    {
+      "id": "refresh_one_page",
+      "status": "planned",
+      "owner": "site owner",
+      "executor_type": "human",
+      "executor": "site owner",
+      "due": "YYYY-MM-DD",
+      "carry_forward_reason": "",
+      "notes": "Refresh one existing page instead of only publishing net-new pages."
+    },
+    {
+      "id": "update_scorecard",
+      "status": "planned",
+      "owner": "site owner",
+      "executor_type": "human",
+      "executor": "site owner",
+      "due": "YYYY-MM-DD",
+      "carry_forward_reason": "",
+      "notes": "Update KPI scorecard before the next weekly cycle."
+    }
+  ]
+}
